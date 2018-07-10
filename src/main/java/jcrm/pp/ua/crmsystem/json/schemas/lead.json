@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/schemas/lead.json",
+  "required": ["leadname"],
+  "additionalProperties": false,
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "leadname": {
+        "type": "string",
+        "maxLength": 255
+      },
+      "leadstatus": {
+        "type": "string",
+        "maxLength": 255
+      },
+      "budget": {
+        "type": "integer"
+      },
+      "tasks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "$ref": "file:schemas/task.json"
+          }
+        }
+      }
+}
+
+

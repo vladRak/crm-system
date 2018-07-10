@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/schemas/name.json",
+  "required": ["firstname"],
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "firstname": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "surname": {
+      "type": "string",
+      "maxLength": 255
+    }
+  }
+}

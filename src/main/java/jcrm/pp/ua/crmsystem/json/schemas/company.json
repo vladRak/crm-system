@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/schemas/company.json",
+  "required": ["fullname","phones"],
+  "additionalProperties": false,
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "fullname": {
+        "type": "string",
+        "maxLength": 255
+      },
+      "phones": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "$ref": "file:schemas/phone.json"
+        }
+      },
+      "emails": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "$ref": "file:schemas/email.json"
+        }
+      },
+      "leads": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "$ref": "file:schemas/lead.json"
+        }
+      },
+      "tasks": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "$ref": "file:schemas/task.json"
+        }
+      },
+      "addresses": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "$ref": "file:schemas/address.json"
+        }
+      },
+	"contacts": {
+        "type": "array",
+        "maxItems": 10,
+        "items": {
+          "type": "object",
+          "$ref": "file:schemas/contact.json"
+        }
+      }
+    }
+}

@@ -1,0 +1,60 @@
+{    "type": "company",
+  "fullname": "SharashMontajCo",
+  "phones": [{
+    "phone": "854545454555"
+  }],
+  "emails": [{
+    "email": "shmoco@nomail.com"
+  }],
+  "addresses": [{
+    "city": "NewVasuki",
+    "address": "Prospekt Kota-Murkota 100500"
+  }],
+  "contacts":[{
+    "type": "contact",
+    "fullname":{
+      "firstname": "Petr",
+      "surname": "Zilberman"
+    },
+    "position": "KrasavchEk",
+    "phones": [{
+      "phone": "454545455454"
+    }],
+    "emails": [{
+      "email": "super_puper_vasiliy5453287@nomail.com"
+    }],
+    "addresses": [{
+      "city": "Vasuki",
+      "address": "Pereulok Jlobskiy 5"
+    }],
+    "leads": [{
+      "budget": 100,
+      "tasks": [{
+        "taskname": "task1",
+        "taskdate": 1522510090000
+      }],
+      "leadname": "lead1",
+      "leadstatus": "status1"
+    }, {
+      "budget": 101,
+      "tasks": [{
+        "taskname": "task2",
+        "taskdate": 1522510090000
+      }],
+      "leadname": "lead2",
+      "leadstatus": "status2"
+    }],
+    "tasks": [{
+      "taskname": "task1",
+      "taskdate": 1522510090000
+    }, {
+      "taskname": "task2",
+      "taskdate": 1522510090000
+    }]
+
+  }]
+
+
+
+
+}

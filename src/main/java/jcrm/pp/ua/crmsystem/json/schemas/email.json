@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/schemas/email.json",
+  "additionalProperties": false,
+  "type": "object",
+  "required": ["email"],
+  "properties":  {
+    "id": {"type":"integer"},
+    "email":  { "type": "string", "format": "email"}
+  }
+}

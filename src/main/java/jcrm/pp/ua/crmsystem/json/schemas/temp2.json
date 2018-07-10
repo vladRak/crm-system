@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/contact.json",
+  "required": ["username","fullname"],
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+
+    "username":  { "type": "string", "format": "email"},
+
+    "roles": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "maxLength": 10
+      }
+    },
+
+    "isblocked":{"type": "boolean"},
+
+    "type": {
+      "type": "string",
+      "maxLength": 20
+    },
+
+    "id": {
+      "type": "integer"
+    },
+
+    "fullname": {
+      "$ref": "file:/home/vlad/schemas/name.json"
+    },
+
+    "position": {
+      "type": "string",
+      "maxLength": 255
+    },
+
+    "phones": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "$ref": "file:/home/vlad/schemas/phone.json"
+      }
+    },
+
+    "emails": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "$ref": "file:/home/vlad/schemas/email.json"
+      }
+    },
+
+    "leads": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "$ref": "file:/home/vlad/schemas/lead.json"
+      }
+    },
+
+    "tasks": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "$ref": "file:/home/vlad/schemas/task.json"
+      }
+    },
+
+    "addresses": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "$ref": "file:/home/vlad/schemas/address.json"
+      }
+    },
+
+    "company": {
+      "$ref": "file:/home/vlad/schemas/company.json"
+    }
+  }
+}

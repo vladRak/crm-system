@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/schemas/address.json",
+  "required": ["city"],
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "city": {
+      "type": "string",
+      "maxLength": 255
+    },
+    "address": {
+      "type": "string",
+      "maxLength": 255
+    }
+  }
+}
+

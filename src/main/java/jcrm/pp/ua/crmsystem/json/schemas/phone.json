@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "/schemas/phone.json",
+  "required": ["phone"],
+  "additionalProperties": false,
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "phone": {
+      "type": "string",
+      "maxLength": 20
+    }
+  }
+}
+
