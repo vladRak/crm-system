@@ -14,10 +14,13 @@ import com.kanishka.virustotalv2.VirusTotalConfig;
 import com.kanishka.virustotalv2.VirustotalPublicV2;
 import com.kanishka.virustotalv2.VirustotalPublicV2Impl;
 import jcrm.pp.ua.crmsystem.customClasses.registration.Branch;
+import jcrm.pp.ua.crmsystem.customClasses.registration.Log4J2PropertiesConf;
 import jcrm.pp.ua.crmsystem.customClasses.registration.VirusResolver;
 import jcrm.pp.ua.crmsystem.entities.Imp.Email;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
@@ -383,9 +386,13 @@ public class CrmSystemApplicationTests {
             // Temp file creation failed
             e.printStackTrace();
         }
-
-
     }
 
+    @Test
+    public void logTest(){
+        Log4J2PropertiesConf log4J2PropertiesConf=new Log4J2PropertiesConf();
+        log4J2PropertiesConf.performSomeTask();
+        System.out.println(log4J2PropertiesConf.getClass().getName());
+    }
 
 }

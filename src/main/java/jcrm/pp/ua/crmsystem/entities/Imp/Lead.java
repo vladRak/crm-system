@@ -11,7 +11,7 @@ import static javax.persistence.CascadeType.MERGE;
 
 @Entity
 @Table(name = "lead")
-@DiscriminatorValue("lead")
+//@DiscriminatorValue("lead")
 @EqualsAndHashCode(callSuper = true)
 @Audited
 @Data

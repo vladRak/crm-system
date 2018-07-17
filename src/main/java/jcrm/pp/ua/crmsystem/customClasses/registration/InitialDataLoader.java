@@ -7,6 +7,8 @@ import jcrm.pp.ua.crmsystem.repositories.PrivilegeRepo;
 import jcrm.pp.ua.crmsystem.repositories.RoleRepo;
 import jcrm.pp.ua.crmsystem.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,8 +19,9 @@ import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.*;
 
-@Component
-public class InitialDataLoader implements ApplicationListener<ContextRefreshedEvent> {
+//@Component
+public class InitialDataLoader implements //ApplicationRunner {
+ApplicationListener<ContextRefreshedEvent> {
 //Make @Bean! and setup in configs admin name and password
 
     boolean alreadySetup = false;
@@ -95,7 +98,8 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
             listQueries.add("INSERT INTO user (id, username, enabled) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1) ,'system', TRUE);");
             listQueries.add("INSERT INTO contact (id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1));");
             listQueries.add("INSERT INTO base_client (id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1));");
-            listQueries.add("INSERT INTO base_business_obj (id, b_o_type, isDeleted, physicalRemoval, optlock) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1),'user', FALSE, FALSE, 0);");
+//            listQueries.add("INSERT INTO base_business_obj (id, b_o_type, isDeleted, physicalRemoval, optlock) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1),'user', FALSE, FALSE, 0);");
+            listQueries.add("INSERT INTO base_business_obj (id, isDeleted, physicalRemoval, optlock) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1), FALSE, FALSE, 0);");
             listQueries.add("INSERT INTO users_roles (user_id, role_id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1),(SELECT role.id FROM role role WHERE role.name = 'ROLE_SYSTEM'));");
             listQueries.add("UPDATE hibernate_sequence SET next_val = next_val + 1;");
 
@@ -138,4 +142,52 @@ public class InitialDataLoader implements ApplicationListener<ContextRefreshedEv
         }
         return role;
     }
+
+//        @Override
+//        public void run(ApplicationArguments applicationArguments) throws Exception {
+//            if (alreadySetup)
+//                return;
+//
+//            /*
+//        * ROLE_SYSTEM(CREATE_ACCOUNT_PRIVILEGE)
+//        * ROLE_GUEST(READ_PRIVILEGE)
+//        * ROLE_USER(
+//        *       WRITE_PRIVILEGE,
+//        *       DELETE_PRIVILEGE)
+//        * ROLE_MANAGER(
+//        *       CREATE_GUEST_PRIVILEGE,
+//        *       CREATE_USER_PRIVILEGE,
+//        *       DELETE_GUEST_PRIVILEGE,
+//        *       DELETE_USER_PRIVILEGE,
+//        *       BACK_UP_PRIVILEGE)
+//        * ROLE_AUDITOR(
+//        *       PHYSICAL_BACK_UP_PRIVILEGE)
+//        * ROLE_ADMINISTRATOR(
+//        *       CREATE_MANAGER_PRIVILEGE,
+//        *       CREATE_AUDITOR_PRIVILEGE,
+//        *       DELETE_MANAGER_PRIVILEGE,
+//        *       DELETE_AUDITOR_PRIVILEGE)
+//        * */
+//
+//            Map<String, Privilege> privilegesMap = new HashMap<>();
+//
+//            for (Privileges p : Privileges.values()) {
+//                Privilege createdPrivilege = createPrivilegeIfNotFound(p.toString());
+//                privilegesMap.put(p.toString(), createdPrivilege);
+//            }
+//
+//            for (Roles r : Roles.values()) {
+//                List<Privilege> privileges = new ArrayList<>();
+//                for (Privileges p : r.privileges()) {
+//                    privileges.add(privilegesMap.get(p.toString()));
+//                }
+//                createRoleIfNotFound(r.toString(), privileges);
+//            }
+//            entityManager.flush();
+//
+//            createUserSystemIfNotFound();
+//
+//            alreadySetup = true;
+//        }
+
 }

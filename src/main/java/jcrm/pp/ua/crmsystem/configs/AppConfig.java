@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 
 import jcrm.pp.ua.crmsystem.customClasses.PageImplBean;
+import jcrm.pp.ua.crmsystem.customClasses.registration.InitialDataLoader;
 import jcrm.pp.ua.crmsystem.customClasses.registration.TxtFileReader;
 import jcrm.pp.ua.crmsystem.customClasses.registration.VirusResolver;
 import jcrm.pp.ua.crmsystem.entities.Imp.User;
@@ -20,8 +21,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
+//import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+//import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -114,25 +115,25 @@ public class AppConfig extends WebMvcConfigurerAdapter {
                 defaultContentType(MediaType.APPLICATION_JSON_UTF8);
     }
 
-    @Bean
-    public RepositoryRestConfigurerAdapter globalRepositoryRestConfigurer() {
-        return new RepositoryRestConfigurerAdapter() {
-            @Override
-            public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
-                super.configureRepositoryRestConfiguration(config);
-                config.getCorsRegistry()
-                        .addMapping("/**")
-                        .allowCredentials(false)
-                        .allowedOrigins("*")
-                        .maxAge(180)
-                        .allowedMethods("PUT", "POST", "GET", "OPTIONS", "DELETE", "PATCH")
-                        .allowedHeaders("*");
-                //.exposedHeaders("Authorization");
-                config.setReturnBodyOnCreate(false);
-                config.setReturnBodyOnUpdate(false);
-            }
-        };
-    }
+//    @Bean
+//    public RepositoryRestConfigurerAdapter globalRepositoryRestConfigurer() {
+//        return new RepositoryRestConfigurerAdapter() {
+//            @Override
+//            public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
+//                super.configureRepositoryRestConfiguration(config);
+//                config.getCorsRegistry()
+//                        .addMapping("/**")
+//                        .allowCredentials(false)
+//                        .allowedOrigins("*")
+//                        .maxAge(180)
+//                        .allowedMethods("PUT", "POST", "GET", "OPTIONS", "DELETE", "PATCH")
+//                        .allowedHeaders("*");
+//                //.exposedHeaders("Authorization");
+//                config.setReturnBodyOnCreate(false);
+//                config.setReturnBodyOnUpdate(false);
+//            }
+//        };
+//    }
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
@@ -155,6 +156,11 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     VirusResolver virusResolver() {
         VirusResolver.getInstance().setAPIKEY(APIKEY);
         return VirusResolver.getInstance();
+    }
+
+    @Bean
+    InitialDataLoader initialDataLoader() {
+        return new InitialDataLoader();
     }
 
 

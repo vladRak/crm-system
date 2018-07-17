@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Entity
-@DiscriminatorValue("baseClient")
+//@DiscriminatorValue("baseClient")
 @Table(name = "base_client")
 @EqualsAndHashCode(callSuper = true, exclude = "leads")
 @Audited

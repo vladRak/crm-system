@@ -5,6 +5,7 @@ import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
+import jcrm.pp.ua.crmsystem.customClasses.registration.Log4J2PropertiesConf;
 import jcrm.pp.ua.crmsystem.dto.UserDTO;
 import jcrm.pp.ua.crmsystem.entities.Imp.User;
 import jcrm.pp.ua.crmsystem.services.AccountService;
@@ -61,6 +62,8 @@ public class AccountController {
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody String importClients(
             @RequestParam("file") MultipartFile file){
+        Log4J2PropertiesConf log4J2PropertiesConf=new Log4J2PropertiesConf();
+        log4J2PropertiesConf.performSomeTask();
         String name = "test11";
         if (!file.isEmpty()) {
             try {

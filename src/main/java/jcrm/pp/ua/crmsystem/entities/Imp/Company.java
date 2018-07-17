@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "company")
-@DiscriminatorValue("company")
+//@DiscriminatorValue("company")
 @Data
 @Audited
 @EqualsAndHashCode(callSuper = true, exclude = "contacts")

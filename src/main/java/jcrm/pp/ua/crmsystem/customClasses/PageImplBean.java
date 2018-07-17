@@ -1,6 +1,5 @@
 package jcrm.pp.ua.crmsystem.customClasses;
 
-import ch.qos.logback.core.net.server.Client;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jcrm.pp.ua.crmsystem.dto.BaseClientDTO;

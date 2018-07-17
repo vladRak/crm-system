@@ -18,10 +18,10 @@ import static javax.persistence.CascadeType.MERGE;
 
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
-@DiscriminatorColumn(
-        name="b_o_type",
-        discriminatorType= DiscriminatorType.STRING)
-@DiscriminatorValue("baseBO")
+//@DiscriminatorColumn(
+//        name="b_o_type",
+//        discriminatorType= DiscriminatorType.STRING)
+//@DiscriminatorValue("baseBO")
 @Table(name = "base_business_obj")
 @EqualsAndHashCode(callSuper = false)
 @OptimisticLocking(type = OptimisticLockType.VERSION)

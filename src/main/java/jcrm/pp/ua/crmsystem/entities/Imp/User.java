@@ -14,7 +14,7 @@ import java.util.Collection;
 
 @Entity
 @Table(name = "user")
-@DiscriminatorValue("user")
+//@DiscriminatorValue("user")
 @EqualsAndHashCode(callSuper = true)
 @Audited
 @Data

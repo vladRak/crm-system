@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "contact")
-@DiscriminatorValue("contact")
+//@DiscriminatorValue("contact")
 @Data
 @Audited
 @EqualsAndHashCode(callSuper = true)
