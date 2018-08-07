@@ -295,6 +295,14 @@
 			</plugin>
 
 			<!--<plugin>-->
+				<!--<groupId>org.apache.maven.plugins</groupId>-->
+				<!--<artifactId>maven-surefire-plugin</artifactId>-->
+				<!--<configuration>-->
+					<!--<argLine>-Dspring.config.location=file:${user.home}crm/conf/config-external.properties</argLine>-->
+				<!--</configuration>-->
+			<!--</plugin>-->
+
+			<!--<plugin>-->
 				<!--<groupId>org.springframework.boot</groupId>-->
 				<!--<artifactId>spring-boot-maven-plugin</artifactId>-->
 				<!--<configuration>-->

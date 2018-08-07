@@ -10,5 +10,5 @@ import javax.transaction.Transactional;
 @Transactional
 public interface RoleRepo extends JpaRepository<Role,Long> {
 
-    Role findByName(String role_admin);
+    Role findByName(String role);
 }

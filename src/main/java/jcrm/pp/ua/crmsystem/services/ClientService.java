@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface ClientService {
+    boolean importClients(byte[] file) throws Exception;
     Page<BaseClientImp> getAllClients(Pageable pageable);
     Page<Contact> getAllContacts(Pageable pageable);
     Page<Company> getAllCompanies(Pageable pageable);
@@ -25,7 +26,5 @@ public interface ClientService {
     Page<BaseClientImp> searchClients(String search, Pageable pageable);
     Page<Contact> searchContacts(String search, Pageable pageable);
     Page<Company> searchCompanies(String search, Pageable pageable);
-
-    //BaseClientImp findAuditByRevision(Long id, int revision);
 
 }

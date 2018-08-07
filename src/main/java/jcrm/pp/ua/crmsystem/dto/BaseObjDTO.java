@@ -1,7 +1,6 @@
 package jcrm.pp.ua.crmsystem.dto;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import jcrm.pp.ua.crmsystem.entities.Imp.User;
 import jcrm.pp.ua.crmsystem.json.serializers.Views;
 import lombok.Data;
 

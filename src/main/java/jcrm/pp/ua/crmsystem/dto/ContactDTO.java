@@ -3,15 +3,8 @@ package jcrm.pp.ua.crmsystem.dto;
 import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jcrm.pp.ua.crmsystem.json.serializers.CompanyDTOSerializer;
-import jcrm.pp.ua.crmsystem.json.serializers.Views;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.JoinColumn;
-import java.util.ArrayList;
-import java.util.List;
 
 
 

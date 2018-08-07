@@ -11,14 +11,14 @@ import jcrm.pp.ua.crmsystem.entities.Imp.User;
 import jcrm.pp.ua.crmsystem.services.AccountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URI;
 
 @RestController
@@ -52,64 +52,78 @@ public class AccountController {
                 if  (jSchUser.validInstance(objectMapper.readTree(string))){
                     UserDTO userDTO = objectMapper.readValue(string,UserDTO.class);
                     User user = modelMapper.map(userDTO,User.class);
-                    accountService.addAccount(user, demo);
+                    accountService.createAccount(user, demo);
                 }
                 else return report.toString();
         return report.toString();
     }
 
-    @PostMapping(value = "/import")
+    @Autowired
+    Environment environment;
+
+    @GetMapping(value = "/check")
     @ResponseStatus(HttpStatus.OK)
-    public @ResponseBody String importClients(
-            @RequestParam("file") MultipartFile file){
-        Log4J2PropertiesConf log4J2PropertiesConf=new Log4J2PropertiesConf();
-        log4J2PropertiesConf.performSomeTask();
-        String name = "test11";
-        if (!file.isEmpty()) {
-            try {
-//                File convFile = new File( file.getOriginalFilename());
-//                file.transferTo(convFile);
+        //@ResponseBody
+    void checkAccount(){
+        System.out.println("Account = " + environment.getProperty("data.name"));
+        System.out.println("Account = " + environment.getProperty("data.source"));
+        System.out.println("spring.jpa.show-sql = " + environment.getProperty("spring.jpa.show-sql"));
+        System.out.println("spring.main.banner-mode = " + environment.getProperty("spring.main.banner-mode"));
+        System.out.println("spring.main.banner-mode = " + environment.toString());
+    }
 
-                System.out.println(file.getContentType());
-
-                byte[] bytes = file.getBytes();
-
-//                ByteArrayOutputStream baos = new ByteArrayOutputStream(bytes.length);
-//                baos.write(bytes, 0, bytes.length);
+//    @PostMapping(value = "/import")
+//    @ResponseStatus(HttpStatus.OK)
+//    public @ResponseBody String importClients(
+//            @RequestParam("file") MultipartFile file){
+//        Log4J2PropertiesConf log4J2PropertiesConf=new Log4J2PropertiesConf();
+//        log4J2PropertiesConf.performSomeTask();
+//        String name = "test11";
+//        if (!file.isEmpty()) {
+//            try {
+////                File convFile = new File( file.getOriginalFilename());
+////                file.transferTo(convFile);
 //
-//                OutputStream outputStream = new FileOutputStream("thefilename");
-//                    baos.writeTo(outputStream);
-
-//                File convFile = new File(file.getOriginalFilename());
-//                convFile.createNewFile();
-//                FileOutputStream fos = new FileOutputStream(convFile);
-//                fos.write(file.getBytes());
-//                fos.close();
-
-//                if (accountService.importClients(convFile)) {
-//                    convFile.delete();
+//                System.out.println(file.getContentType());
+//
+//                byte[] bytes = file.getBytes();
+//
+////                ByteArrayOutputStream baos = new ByteArrayOutputStream(bytes.length);
+////                baos.write(bytes, 0, bytes.length);
+////
+////                OutputStream outputStream = new FileOutputStream("thefilename");
+////                    baos.writeTo(outputStream);
+//
+////                File convFile = new File(file.getOriginalFilename());
+////                convFile.createNewFile();
+////                FileOutputStream fos = new FileOutputStream(convFile);
+////                fos.write(file.getBytes());
+////                fos.close();
+//
+////                if (accountService.importClients(convFile)) {
+////                    convFile.delete();
+////                    return "You successfully uploaded " + name + " into " + name + "-uploaded !";
+////                }
+////                else return "Not uploaded!!!!!";
+//
+//
+//                if (accountService.importClients(bytes)) {
 //                    return "You successfully uploaded " + name + " into " + name + "-uploaded !";
 //                }
 //                else return "Not uploaded!!!!!";
-
-
-                if (accountService.importClients(bytes)) {
-                    return "You successfully uploaded " + name + " into " + name + "-uploaded !";
-                }
-                else return "Not uploaded!!!!!";
-
-
-//                byte[] bytes = file.getBytes();
-//                BufferedOutputStream stream =
-//                        new BufferedOutputStream(new FileOutputStream(new File(name + "-uploaded")));
-//                stream.write(bytes);
-//                stream.close();
-
-            } catch (Exception e) {
-                return "You failed to upload " + name + " => " + e.getMessage();
-            }
-        } else {
-            return "You failed to upload " + name + " because the file was empty.";
-        }
-    }
+//
+//
+////                byte[] bytes = file.getBytes();
+////                BufferedOutputStream stream =
+////                        new BufferedOutputStream(new FileOutputStream(new File(name + "-uploaded")));
+////                stream.write(bytes);
+////                stream.close();
+//
+//            } catch (Exception e) {
+//                return "You failed to upload " + name + " => " + e.getMessage();
+//            }
+//        } else {
+//            return "You failed to upload " + name + " because the file was empty.";
+//        }
+//    }
 }

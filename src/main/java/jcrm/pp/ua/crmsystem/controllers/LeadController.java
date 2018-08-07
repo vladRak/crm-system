@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +37,7 @@ public class LeadController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @ResponseBody Page<LeadDTO> findAllLeads(Pageable pageable) throws IOException {
+    @ResponseBody Page<LeadDTO> findAllLeads(@PageableDefault(size = 20) Pageable pageable) throws IOException {
         Page<Lead> contactPage = leadService.getAllLeads(pageable);
         Page<LeadDTO> resultPage = contactPage.map(new Converter<Lead, LeadDTO>() {
             @Override

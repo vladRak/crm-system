@@ -2,8 +2,6 @@ package jcrm.pp.ua.crmsystem.repositories;
 
 import jcrm.pp.ua.crmsystem.entities.Imp.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -1,6 +1,5 @@
 package jcrm.pp.ua.crmsystem.repositories;
 
-import jcrm.pp.ua.crmsystem.entities.BaseClient;
 import jcrm.pp.ua.crmsystem.entities.Imp.BaseClientImp;
 import jcrm.pp.ua.crmsystem.entities.Imp.Company;
 import jcrm.pp.ua.crmsystem.entities.Imp.Contact;
@@ -43,7 +42,7 @@ public interface BaseClientRepo extends JpaRepository<BaseClientImp,Long>{
 
     @Query(value = "SELECT contact FROM Contact contact " +
             "left join contact.fullName as fullName " +
-            "where lower(contact.fullName.firstname) like concat('%',:search,'%') " +
+            "where lower(contact.fullName.firstName) like concat('%',:search,'%') " +
             "or lower(contact.fullName.surname)  like concat('%',:search,'%')")
     Page<Contact> searchContactByName(@Param("search") String search, Pageable pageable);
 

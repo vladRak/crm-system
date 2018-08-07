@@ -1,16 +1,17 @@
 package jcrm.pp.ua.crmsystem.customClasses;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import jcrm.pp.ua.crmsystem.dto.BaseClientDTO;
-//import jcrm.pp.ua.crmsystem.dto.ClientDTOInt;
 import jcrm.pp.ua.crmsystem.dto.ListOfConDTO;
-import jcrm.pp.ua.crmsystem.json.serializers.PageSerializer;
-import org.springframework.core.convert.converter.Converter;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.ArrayList;
 import java.util.List;
+
+//import jcrm.pp.ua.crmsystem.dto.ClientDTOInt;
 //@JsonSerialize(using = PageSerializer.class)
 public class PageImplBean extends PageImpl<BaseClientDTO>{
 

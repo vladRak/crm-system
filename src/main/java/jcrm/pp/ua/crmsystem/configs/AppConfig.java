@@ -1,28 +1,25 @@
 package jcrm.pp.ua.crmsystem.configs;
 
 import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.*;
+import com.fasterxml.jackson.databind.Module;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
-
 import jcrm.pp.ua.crmsystem.customClasses.PageImplBean;
 import jcrm.pp.ua.crmsystem.customClasses.registration.InitialDataLoader;
-import jcrm.pp.ua.crmsystem.customClasses.registration.TxtFileReader;
 import jcrm.pp.ua.crmsystem.customClasses.registration.VirusResolver;
 import jcrm.pp.ua.crmsystem.entities.Imp.User;
 import jcrm.pp.ua.crmsystem.json.serializers.PageSerializer;
 import jcrm.pp.ua.crmsystem.listeners.event.RootAwareEventListenerIntegrator;
-
 import org.hibernate.jpa.boot.spi.IntegratorProvider;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-//import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-//import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -31,34 +28,39 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
-import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Stream;
+
+//import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+//import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 
 @Configuration
-@PropertySource(value = {"classpath:config.properties"})
+@PropertySources({
+        @PropertySource(value = {"classpath:config.properties"}),
+        @PropertySource(value = {"file:${user.home}/crm/conf/config.properties"}, ignoreResourceNotFound = true),
+        @PropertySource(value = {"file:${user.home}/crm/conf/application.properties"}, ignoreResourceNotFound=true)
+})
 @EnableTransactionManagement
 //@EnableJpaRepositories
 @EnableWebMvc
 @EnableJpaAuditing
 public class AppConfig extends WebMvcConfigurerAdapter {
-    @Value("${hibernate.dialect}")
-    private String sqlDialect;
+//    @Value("${hibernate.dialect}")
+//    private String sqlDialect;
+//
+//    @Value("${hbm2ddl.auto}")
+//    private String hbm2dllAuto;
 
-    @Value("${hbm2ddl.auto}")
-    private String hbm2dllAuto;
+    @Autowired
+    Environment environment;
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf) {
@@ -69,7 +71,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory
             (DataSource dataSource, JpaVendorAdapter jpaVendeorAdapter) {
         Properties jpaProp = new Properties();
-        jpaProp.put("hibernate.hbm2ddl.auto", hbm2dllAuto);
+        jpaProp.put("hibernate.hbm2ddl.auto", environment.getProperty("hbm2ddl.auto"));
         jpaProp.put(
                 "hibernate.integrator_provider",
                 (IntegratorProvider) () -> Collections.singletonList(
@@ -89,7 +91,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        adapter.setDatabasePlatform(sqlDialect);
+        adapter.setDatabasePlatform(environment.getProperty("hibernate.dialect"));
         return adapter;
     }
 

@@ -7,7 +7,6 @@ import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import com.kanishka.virustotal.dto.FileScanReport;
 import com.kanishka.virustotal.dto.ScanInfo;
-import com.kanishka.virustotal.dto.VirusScanInfo;
 import com.kanishka.virustotal.exception.APIKeyNotFoundException;
 import com.kanishka.virustotal.exception.UnauthorizedAccessException;
 import com.kanishka.virustotalv2.VirusTotalConfig;
@@ -16,26 +15,27 @@ import com.kanishka.virustotalv2.VirustotalPublicV2Impl;
 import jcrm.pp.ua.crmsystem.customClasses.registration.Branch;
 import jcrm.pp.ua.crmsystem.customClasses.registration.Log4J2PropertiesConf;
 import jcrm.pp.ua.crmsystem.customClasses.registration.VirusResolver;
-import jcrm.pp.ua.crmsystem.entities.Imp.Email;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
-import java.net.URI;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Stream;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -393,6 +393,46 @@ public class CrmSystemApplicationTests {
         Log4J2PropertiesConf log4J2PropertiesConf=new Log4J2PropertiesConf();
         log4J2PropertiesConf.performSomeTask();
         System.out.println(log4J2PropertiesConf.getClass().getName());
+    }
+    @Test
+    public void dateTest() {
+        String string = "1/11 /1981";
+        String stringWithoutSpaces = string.replaceAll(" ","");
+        char[] chars = {'/','-','.',','};
+        String separator = "";
+        boolean separatorFind = false;
+        for (char c: stringWithoutSpaces.toCharArray()){
+            for (char ch: chars) {
+                if (c == ch){
+                    separator = String.valueOf(ch);
+                    separatorFind = true;
+                    break;
+                }
+            }
+            if (separatorFind) break;
+        }
+
+        DateFormat format = new SimpleDateFormat("dd" + separator + "MM" + separator + "yyyy", Locale.ENGLISH);
+
+        try {
+            Date date = format.parse(stringWithoutSpaces);
+            System.out.println(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+//        DateFormat format1 = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
+//        DateFormat format2 = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+//        List<DateFormat> dateFormats = new ArrayList<>();
+//        dateFormats.addAll(Arrays.asList(format1,format2));
+//        for (DateFormat df: dateFormats) {
+//            try {
+//                Date date = df.parse(stringWithoutSpaces);
+//                System.out.println(date);
+//            } catch (ParseException e) {
+//                //e.printStackTrace();
+//            }
+//        }
     }
 
 }

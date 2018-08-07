@@ -1,6 +1,5 @@
 package jcrm.pp.ua.crmsystem.entities.Imp;
 
-import jcrm.pp.ua.crmsystem.entities.BaseBusinessObj;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.OptimisticLockType;

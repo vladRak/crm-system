@@ -6,8 +6,6 @@ import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 import org.hibernate.envers.Audited;
-import org.hibernate.envers.NotAudited;
-import org.springframework.data.annotation.CreatedBy;
 
 import javax.persistence.*;
 import java.io.Serializable;

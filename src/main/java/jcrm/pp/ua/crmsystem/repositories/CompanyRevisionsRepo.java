@@ -2,7 +2,6 @@ package jcrm.pp.ua.crmsystem.repositories;
 
 import jcrm.pp.ua.crmsystem.entities.EntityWithRevision;
 import jcrm.pp.ua.crmsystem.entities.Imp.Company;
-import jcrm.pp.ua.crmsystem.entities.Imp.Contact;
 import jcrm.pp.ua.crmsystem.entities.RevisionsEntity;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;

@@ -1,14 +1,11 @@
 package jcrm.pp.ua.crmsystem.dto;
 
-import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import jcrm.pp.ua.crmsystem.json.serializers.ContactDTOSerializer;
-import jcrm.pp.ua.crmsystem.json.serializers.ListOfContactDTO;
-import jcrm.pp.ua.crmsystem.json.serializers.Views;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;

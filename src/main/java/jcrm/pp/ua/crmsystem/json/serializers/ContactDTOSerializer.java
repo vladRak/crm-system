@@ -5,8 +5,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
-
-import jcrm.pp.ua.crmsystem.dto.*;
+import jcrm.pp.ua.crmsystem.dto.AddressDTO;
+import jcrm.pp.ua.crmsystem.dto.ContactDTO;
+import jcrm.pp.ua.crmsystem.dto.EmailDTO;
+import jcrm.pp.ua.crmsystem.dto.PhoneDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;

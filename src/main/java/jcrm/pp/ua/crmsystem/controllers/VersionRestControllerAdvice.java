@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 @RestControllerAdvice
 public class VersionRestControllerAdvice {
 
-        @ExceptionHandler(OptimisticLockException.class)
-        public String handleOptLockException(OptimisticLockException ex, HttpServletResponse response) {
-            try {
-                response.sendError(460);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return ex.getMessage();
-        }
+//        @ExceptionHandler(OptimisticLockException.class)
+//        public String handleOptLockException(OptimisticLockException ex, HttpServletResponse response) {
+//            try {
+//                response.sendError(460);
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//            return ex.getMessage();
+//        }
 }

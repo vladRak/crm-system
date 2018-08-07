@@ -1,8 +1,9 @@
 package jcrm.pp.ua.crmsystem.services.imp;
 
-import jcrm.pp.ua.crmsystem.customClasses.registration.ClamAvClient;
-import jcrm.pp.ua.crmsystem.customClasses.registration.VirusResolver;
-import jcrm.pp.ua.crmsystem.entities.Imp.*;
+import jcrm.pp.ua.crmsystem.entities.Imp.AccountImp;
+import jcrm.pp.ua.crmsystem.entities.Imp.Company;
+import jcrm.pp.ua.crmsystem.entities.Imp.Email;
+import jcrm.pp.ua.crmsystem.entities.Imp.User;
 import jcrm.pp.ua.crmsystem.repositories.AccountRepo;
 import jcrm.pp.ua.crmsystem.repositories.RoleRepo;
 import jcrm.pp.ua.crmsystem.services.AccountService;
@@ -12,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 @Service
@@ -24,70 +25,102 @@ public class AccountServiceImp implements AccountService{
     @Autowired
     RoleRepo roleRepository;
 
-    VirusResolver virusResolver = VirusResolver.getInstance();
-
     @PreAuthorize("hasRole('ANONYMOUS')")
-    public void addAccount(User user, boolean demo){
+    public boolean createAccount(User user, boolean demo){
+        try {
+            Email email = new Email();
+            email.setEmail(user.getUsername());
 
-        Email email = new Email();
-        email.setEmail(user.getUsername());
+            user.addEmails(Arrays.asList(email));
 
-        user.addEmails(Arrays.asList(email));
+            Company company = new Company();
+            company.setResponsible(user);
+            user.setCompany(company);
+            user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_ADMINISTRATOR")));
 
-        Company company = new Company();
-        company.setResponsible(user);
-        user.setCompany(company);
-        user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_ADMINISTRATOR")));
+            AccountImp account = new AccountImp();
+            account.addClients(Arrays.asList(user,company));
 
-        AccountImp account = new AccountImp();
-        account.addClients(Arrays.asList(user,company));
+            if (demo) demoData(account);
+            accountRepo.save(account);
 
-        if (demo) demoData(account);
-        accountRepo.save(account);
+            return true;
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
+
+//    @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
+//    public boolean importClients(byte[] file) throws Exception {
+//        ClamAvClient clamAvClient = new ClamAvClient();
+//        return clamAvClient.scan(file);
+//    }
 
     @PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
-    public void deleteAccount(User admin){
-        accountRepo.delete(admin.getAccount());
+    public boolean removeAccount(User admin){
+        try {
+            accountRepo.delete(admin.getAccount());
+            return  true;
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 
     @PreAuthorize("hasAuthority('ROLE_SYS_ADMINISTRATOR')")
-    public void blockAccount(Long id){
-        AccountImp account = accountRepo.findOne(id);
-        account.setEnable(false);
+    public boolean blockAccount(Long id){
+        try {
+            AccountImp account = accountRepo.findOne(id);
+            account.setEnable(false);
+            return true;
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 
+    @PreAuthorize("hasAuthority('ROLE_SYS_ADMINISTRATOR')")
     public boolean accountStatus(Long id){
-        return accountRepo.findOne(id).isEnable();
+        try {
+            return accountRepo.findOne(id).isEnable();
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 
     @PreAuthorize("hasAuthority('ROLE_SYS_ADMINISTRATOR')")
-    public void removeAccount(Long id){
-        accountRepo.delete(id);
+    public boolean deleteAccount(Long id){
+        try {
+            accountRepo.delete(id);
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return false;
     }
 
     @PreAuthorize("hasAuthority('ROLE_SYS_ADMINISTRATOR')")
     public Page<AccountImp> getAllAccounts(Pageable pageable){
-        Page<AccountImp> page = accountRepo.findAll(pageable);
-        return page;
+        try {
+            return accountRepo.findAll(pageable);
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 
     @PreAuthorize("hasAuthority('ROLE_SYS_ADMINISTRATOR')")
     public AccountImp getAccountById(Long id){
-        AccountImp account = accountRepo.findOne(id);
-        return account;
+        try {
+           return accountRepo.findOne(id);
+        }catch (Exception ex){
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 
     protected void demoData(AccountImp account){
 
-    }
-
-    public boolean importClients(File file) throws InterruptedException {
-        return virusResolver.scanedFileIsSafety(file);
-    }
-
-    public boolean importClients(byte[] file) throws Exception {
-        ClamAvClient clamAvClient = new ClamAvClient();
-        return clamAvClient.scan(file);
     }
 }

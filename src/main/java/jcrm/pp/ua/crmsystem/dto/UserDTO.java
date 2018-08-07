@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
 import java.io.Serializable;
 @JsonTypeName(value = "user")
 @EqualsAndHashCode(callSuper = true)

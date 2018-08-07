@@ -2,13 +2,9 @@ package jcrm.pp.ua.crmsystem.json.serializers;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import jcrm.pp.ua.crmsystem.dto.AddressDTO;
 import jcrm.pp.ua.crmsystem.dto.ContactDTO;
-import jcrm.pp.ua.crmsystem.dto.EmailDTO;
-import jcrm.pp.ua.crmsystem.dto.PhoneDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;

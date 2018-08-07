@@ -9,8 +9,6 @@ import org.hibernate.envers.Audited;
 import javax.persistence.*;
 import java.io.Serializable;
 
-import static javax.persistence.CascadeType.MERGE;
-
 
 @Entity
 @Table(name = "phone")
@@ -26,7 +24,7 @@ public class Phone extends BaseEntityImp implements RootAware<BaseClientImp>, Se
 
     private String phone;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST,MERGE})
+    @ManyToOne()//cascade = {CascadeType.PERSIST,MERGE})
     @JoinColumn(name = "client_id")
     private BaseClientImp client;
 

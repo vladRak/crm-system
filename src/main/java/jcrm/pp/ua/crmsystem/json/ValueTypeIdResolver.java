@@ -5,9 +5,10 @@ import com.fasterxml.jackson.databind.DatabindContext;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.jsontype.impl.TypeIdResolverBase;
 import jcrm.pp.ua.crmsystem.dto.BaseClientDTO;
-//import jcrm.pp.ua.crmsystem.dto.ClientDTOInt;
 
 import java.io.IOException;
+
+//import jcrm.pp.ua.crmsystem.dto.ClientDTOInt;
 
 public class ValueTypeIdResolver extends TypeIdResolverBase {
 

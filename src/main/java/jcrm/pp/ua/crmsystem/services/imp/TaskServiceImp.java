@@ -19,12 +19,13 @@ public class TaskServiceImp implements TaskService{
 
     @Override
     public Page<Task> getAllTasks(Pageable pageable) {
-        List<Task> list = (List<Task>) taskRepo.findAll();
-        int start = pageable.getOffset();
-        int end = (start + pageable.getPageSize()) > list.size() ? list.size() : (start + pageable.getPageSize());
-        Page<Task> pages = new PageImpl(list.subList(start, end), pageable, list.size());
+        Page<Task> page = taskRepo.findAll(pageable);
+        return page;
+    }
 
-        return pages;
+    @Override
+    public Task getTaskById(long id) {
+        return taskRepo.findOne(id);
     }
 
     @Override
@@ -42,9 +43,5 @@ public class TaskServiceImp implements TaskService{
         taskRepo.save(task);
     }
 
-    @Override
-    public Task getTaskById(long id) {
-        Task task = taskRepo.findOne(id);
-        return task;
-    }
+
 }

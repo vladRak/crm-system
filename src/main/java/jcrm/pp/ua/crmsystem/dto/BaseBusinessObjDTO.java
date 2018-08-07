@@ -1,7 +1,5 @@
 package jcrm.pp.ua.crmsystem.dto;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jcrm.pp.ua.crmsystem.entities.Imp.Task;
 import lombok.Data;
 
 import java.io.Serializable;

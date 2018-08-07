@@ -12,6 +12,8 @@ import jcrm.pp.ua.crmsystem.customClasses.CompanyPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.EmailService;
 import jcrm.pp.ua.crmsystem.customClasses.PageImplBean;
+import jcrm.pp.ua.crmsystem.customClasses.registration.CSVReader;
+import jcrm.pp.ua.crmsystem.customClasses.registration.Log4J2PropertiesConf;
 import jcrm.pp.ua.crmsystem.dto.BaseClientDTO;
 import jcrm.pp.ua.crmsystem.dto.CompanyDTO;
 import jcrm.pp.ua.crmsystem.dto.ContactDTO;
@@ -24,23 +26,33 @@ import jcrm.pp.ua.crmsystem.services.HistoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
+import java.nio.file.Path;
+import java.security.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 
 @RestController
 @RequestMapping(
-        value = "list",
+        value = "clients",
         produces = {MediaType.APPLICATION_JSON_UTF8_VALUE,MediaType.TEXT_PLAIN_VALUE,MediaType.ALL_VALUE},
         consumes = {MediaType.APPLICATION_JSON_UTF8_VALUE,MediaType.TEXT_PLAIN_VALUE,MediaType.ALL_VALUE})
 public class ClientController {
@@ -59,7 +71,7 @@ public class ClientController {
     EmailService emailService;
 
     //@JsonView(Views.OneLineName.class)
-    @GetMapping
+    @GetMapping(value = "/list")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
     Page<BaseClientDTO> findAllClients(@RequestParam(value="search", required = false) String search,
@@ -94,7 +106,7 @@ public class ClientController {
         return new PageImplBean(resultPage);
     }
 
-    @GetMapping(value = "/contacts")
+    @GetMapping(value = "/list/contacts")
     @ResponseBody Page<ContactDTO> findAllContacts(@RequestParam(value="search", required = false) String search,
                                                    @PageableDefault(size = 20) Pageable pageable) throws IOException {
         Page<Contact> contactPage;
@@ -112,7 +124,7 @@ public class ClientController {
         return resultPage;
     }
 
-    @GetMapping(value = "/contacts/{id}")
+    @GetMapping(value = "/contact/{id}")
     @ResponseBody
     ObjectNode findContactByID(@PathVariable long id){
         Contact contact = clientService.getContactById(id);
@@ -123,7 +135,7 @@ public class ClientController {
         return objectNode;
     }
 
-    @GetMapping(value = "/companies")
+    @GetMapping(value = "/list/companies")
     @ResponseBody Page<CompanyDTO> findAllCompanies(@RequestParam(value="search", required = false) String search,
                                                     @PageableDefault(size = 20) Pageable pageable){
         Page<Company> companiesPage;
@@ -141,7 +153,7 @@ public class ClientController {
         return resultPage;
     }
 
-    @GetMapping(value = "/companies/{id}")
+    @GetMapping(value = "/company/{id}")
     @ResponseBody CompanyDTO findCompanyByID(@PathVariable long id){
         Company company = clientService.getCompanyById(id);
         CompanyDTO companyDTO = modelMapper.map(company,CompanyDTO.class);
@@ -194,19 +206,19 @@ public class ClientController {
         return report.toString();
     }
 
-    @DeleteMapping(value = "/companies/{id}")
+    @DeleteMapping(value = "/company/{id}")
     @ResponseStatus(HttpStatus.OK)
     void removeCompany(@PathVariable long id){
         clientService.removeCompanyById(id);
     }
 
-    @DeleteMapping(value = "/contacts/{id}")
+    @DeleteMapping(value = "/contact/{id}")
     @ResponseStatus(HttpStatus.OK)
     void removeClient(@PathVariable long id){
         clientService.removeContactById(id);
     }
 
-    @PutMapping(value = "/contacts/{id}")
+    @PutMapping(value = "/contact/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody String updateClient(@PathVariable Long id, @RequestBody String string) throws ProcessingException, IOException {
 
@@ -229,7 +241,7 @@ public class ClientController {
         return report.toString();
     }
 
-    @PutMapping(value = "/companies/{id}")
+    @PutMapping(value = "/company/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody String updateCompany(@PathVariable Long id, @RequestBody String string) throws ProcessingException, IOException {
 
@@ -252,7 +264,7 @@ public class ClientController {
         return report.toString();
     }
 
-    @PatchMapping(value = "/contacts/{id}")
+    @PatchMapping(value = "/contact/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody String patchClient(@PathVariable Long id, @RequestBody String string) throws ProcessingException, IOException {
 
@@ -274,7 +286,7 @@ public class ClientController {
         return report.toString();
     }
 
-    @PatchMapping(value = "/companies/{id}")
+    @PatchMapping(value = "/company/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody String patchCompany(@PathVariable Long id, @RequestBody String string) throws ProcessingException, IOException {
 
@@ -296,6 +308,89 @@ public class ClientController {
         return report.toString();
     }
 
+    @PostMapping(value = "/import")
+    @ResponseStatus(HttpStatus.OK)
+    public @ResponseBody String importClients(
+            @RequestParam("file") MultipartFile file){
+        String name = "test11";
+        if (!file.isEmpty()) {
+            try {
+//                File convFile = new File( file.getOriginalFilename());
+//                file.transferTo(convFile);
+
+                System.out.println(file.getContentType());
+
+                byte[] bytes = file.getBytes();
+
+                if (clientService.importClients(bytes)) {
+                    File tempFile = File.createTempFile("tmp",".csv");
+                    String path = tempFile.getAbsolutePath();
+                    FileOutputStream stream = new FileOutputStream(path);
+                    try {
+                        stream.write(bytes);
+                    } finally {
+                        stream.close();
+                    }
+                    CSVReader.parse(path);
+                    tempFile.delete();
+                    //convFile.deleteOnExit();
+                    return "You successfully uploaded " + name + " into " + name + "-uploaded !";
+                }
+                else return "Not uploaded!!!!!";
+
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream(bytes.length);
+//                baos.write(bytes, 0, bytes.length);
+//
+//                OutputStream outputStream = new FileOutputStream("thefilename");
+//                    baos.writeTo(outputStream);
+
+//                File convFile = new File(file.getOriginalFilename());
+//                convFile.createNewFile();
+//                FileOutputStream fos = new FileOutputStream(convFile);
+//                fos.write(file.getBytes());
+//                fos.close();
+
+//                if (accountService.importClients(convFile)) {
+//                    convFile.delete();
+//                    return "You successfully uploaded " + name + " into " + name + "-uploaded !";
+//                }
+//                else return "Not uploaded!!!!!";
+
+
+
+
+
+//                byte[] bytes = file.getBytes();
+//                BufferedOutputStream stream =
+//                        new BufferedOutputStream(new FileOutputStream(new File(name + "-uploaded")));
+//                stream.write(bytes);
+//                stream.close();
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return "You failed to upload " + name + " => " + e.getMessage();
+
+            }
+        } else {
+            return "You failed to upload " + name + " because the file was empty.";
+        }
+    }
+
+    @RequestMapping(path = "/export", method = RequestMethod.GET)
+    public ResponseEntity<Resource> download(String param) throws IOException {
+
+        String s = "/home/vlad/example.csv";
+        File file = new File(s);
+        InputStreamResource resource = new InputStreamResource(new FileInputStream(file));
+
+        return ResponseEntity
+                .ok()
+                //.headers(headers)
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment;filename=" + file.getName())
+                .contentLength(file.length())
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(resource);
+    }
 
 
 

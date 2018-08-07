@@ -2,22 +2,17 @@ package jcrm.pp.ua.crmsystem.services.imp;
 
 import jcrm.pp.ua.crmsystem.customClasses.CompanyPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
-import jcrm.pp.ua.crmsystem.entities.BaseClient;
+import jcrm.pp.ua.crmsystem.customClasses.registration.ClamAvClient;
 import jcrm.pp.ua.crmsystem.entities.Imp.*;
-import jcrm.pp.ua.crmsystem.repositories.*;
+import jcrm.pp.ua.crmsystem.repositories.BaseClientRepo;
 import jcrm.pp.ua.crmsystem.services.ClientService;
-import org.hibernate.envers.AuditReader;
-import org.hibernate.envers.AuditReaderFactory;
-import org.hibernate.envers.query.AuditEntity;
-import org.hibernate.envers.query.AuditQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Map;
 
@@ -26,13 +21,15 @@ public class ClientServiceImp implements ClientService{
 
     @Autowired
     private BaseClientRepo baseClientRepo;
-    @Autowired
-    private ContactRepo contactRepo;
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     public ClientServiceImp() {
+    }
+
+    //@PreAuthorize("hasAuthority('ROLE_ADMINISTRATOR')")
+    @Override
+    public boolean importClients(byte[] file) throws Exception{
+            ClamAvClient clamAvClient = new ClamAvClient();
+            return clamAvClient.scan(file);
     }
 
     @Override
@@ -71,15 +68,16 @@ public class ClientServiceImp implements ClientService{
 
     @Override
     public void removeContactById(Long id) {
-        Contact contact = contactRepo.getOne(id);
+        Contact contact = (Contact) baseClientRepo.getOne(id);
         contact.setDeleted(true);
         baseClientRepo.save(contact);
-        //baseClientRepo.delete(id);
     }
 
     @Override
     public void removeCompanyById(Long id) {
-        baseClientRepo.delete(id);
+        Company company = (Company) baseClientRepo.getOne(id);
+        company.setDeleted(true);
+        baseClientRepo.save(company);
     }
 
     @Override
@@ -180,26 +178,5 @@ public class ClientServiceImp implements ClientService{
         Page<Company> page = baseClientRepo.searchCompanyByName(search,pageable);
         return page;
     }
-
-    public BaseClientImp findAuditByRevision(Long id, int revision) {
-        AuditReader reader = AuditReaderFactory.get(entityManager);
-        List<Contact> list =  reader.createQuery().forRevisionsOfEntity(Contact.class, false,false).getResultList();
-        Contact contact = reader.find(Contact.class, id, revision);
-
-        AuditQuery auditQuery = reader.createQuery().forRevisionsOfEntity(Contact.class, false,false);
-        auditQuery.add( AuditEntity.id().eq(id));
-
-        List result =  auditQuery.getResultList();
-
-//        if(result.size() > 0){
-//            String queryString = "delete c from contact_AUD c where c.id = :id;";
-//            entityManager.createNativeQuery(queryString).setParameter("id", 1L);
-//        }
-
-        return contact;
-    }
-
-    //        int start = pageable.getOffset();
-//        int end = (start + pageable.getPageSize()) > list.size() ? list.size() : (start + pageable.getPageSize());
 }
 

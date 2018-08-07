@@ -1,11 +1,17 @@
 package jcrm.pp.ua.crmsystem.services;
 
+import jcrm.pp.ua.crmsystem.entities.Imp.AccountImp;
 import jcrm.pp.ua.crmsystem.entities.Imp.User;
-
-import java.io.File;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface AccountService {
-    void addAccount(User user, boolean demo);
-    boolean importClients(File file) throws InterruptedException;
-    boolean importClients(byte[] file) throws Exception;
+    boolean createAccount(User user, boolean demo);
+    boolean removeAccount(User admin);
+    boolean blockAccount(Long id);
+    boolean accountStatus(Long id);
+    Page<AccountImp> getAllAccounts(Pageable pageable);
+    AccountImp getAccountById(Long id);
+    boolean deleteAccount(Long id);
+
 }

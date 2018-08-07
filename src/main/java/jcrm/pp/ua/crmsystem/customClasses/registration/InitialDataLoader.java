@@ -7,12 +7,9 @@ import jcrm.pp.ua.crmsystem.repositories.PrivilegeRepo;
 import jcrm.pp.ua.crmsystem.repositories.RoleRepo;
 import jcrm.pp.ua.crmsystem.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -110,10 +107,12 @@ ApplicationListener<ContextRefreshedEvent> {
         }
 
         User sysAdmin = userRepository.findByUsername("sysAdmin");
-        if (sysAdmin == null) {//
+        if (sysAdmin == null) {
             sysAdmin = new User();
             sysAdmin.setUsername("sysAdmin");
             sysAdmin.setPassword("173247");
+            Role role = roleRepository.findByName("ROLE_SYS_ADMINISTRATOR");
+            sysAdmin.setRoles(Arrays.asList(role));
             userRepository.save(sysAdmin);
         }
     }

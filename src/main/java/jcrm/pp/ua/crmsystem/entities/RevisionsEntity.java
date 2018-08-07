@@ -1,7 +1,10 @@
 package jcrm.pp.ua.crmsystem.entities;
 
 import lombok.Data;
-import org.hibernate.envers.*;
+import org.hibernate.envers.RevisionEntity;
+import org.hibernate.envers.RevisionListener;
+import org.hibernate.envers.RevisionNumber;
+import org.hibernate.envers.RevisionTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;

@@ -1,19 +1,20 @@
 package jcrm.pp.ua.crmsystem.entities.Imp;
 
 import lombok.Data;
+
 import java.io.Serializable;
 
 @Data
 public class Name implements Serializable{
 
-    private String firstname;
+    private String firstName;
     private String surname;
 
     public Name(){
     }
 
-    public Name(String firstname, String surname){
-        this.firstname = firstname;
+    public Name(String firstName, String surname){
+        this.firstName = firstName;
         this.surname = surname;
     }
 }
