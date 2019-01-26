@@ -3,13 +3,12 @@ package jcrm.pp.ua.crmsystem.services.imp;
 import jcrm.pp.ua.crmsystem.customClasses.CompanyPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.registration.ClamAvClient;
-import jcrm.pp.ua.crmsystem.entities.Imp.*;
+import jcrm.pp.ua.crmsystem.entities.*;
 import jcrm.pp.ua.crmsystem.repositories.BaseClientRepo;
 import jcrm.pp.ua.crmsystem.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.OptimisticLockException;
@@ -82,21 +81,21 @@ public class ClientServiceImp implements ClientService{
 
     @Override
     public void updateContact(Contact contact, Long id) {
-        //BaseClientImp contactTemp = baseClientRepo.getOne(id);
+        //BaseClient contactTemp = baseClientRepo.getOne(id);
         contact.setId(id);
         baseClientRepo.save(contact);
     }
 
     @Override
     public void updateCompany(Company company, Long id) {
-        //BaseClientImp contactTemp = baseClientRepo.getOne(id);
+        //BaseClient contactTemp = baseClientRepo.getOne(id);
         company.setId(id);
         baseClientRepo.save(company);
     }
 
     @Override
-    public Page<BaseClientImp> getAllClients(Pageable pageable) {
-        Page<BaseClientImp> page = baseClientRepo.findAll(pageable);
+    public Page<BaseClient> getAllClients(Pageable pageable) {
+        Page<BaseClient> page = baseClientRepo.findAll(pageable);
         return page;
     }
 
@@ -162,8 +161,8 @@ public class ClientServiceImp implements ClientService{
     }
 
     @Override
-    public Page<BaseClientImp> searchClients(String search, Pageable pageable) {
-        Page<BaseClientImp> page =null; //baseClientRepo.searchByName(search,pageable);
+    public Page<BaseClient> searchClients(String search, Pageable pageable) {
+        Page<BaseClient> page =null; //baseClientRepo.searchByName(search,pageable);
         return page;
     }
 

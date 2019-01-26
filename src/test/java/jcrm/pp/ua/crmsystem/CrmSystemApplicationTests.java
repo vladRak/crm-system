@@ -13,7 +13,6 @@ import com.kanishka.virustotalv2.VirusTotalConfig;
 import com.kanishka.virustotalv2.VirustotalPublicV2;
 import com.kanishka.virustotalv2.VirustotalPublicV2Impl;
 import jcrm.pp.ua.crmsystem.customClasses.registration.Branch;
-import jcrm.pp.ua.crmsystem.customClasses.registration.Log4J2PropertiesConf;
 import jcrm.pp.ua.crmsystem.customClasses.registration.VirusResolver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -388,12 +387,7 @@ public class CrmSystemApplicationTests {
         }
     }
 
-    @Test
-    public void logTest(){
-        Log4J2PropertiesConf log4J2PropertiesConf=new Log4J2PropertiesConf();
-        log4J2PropertiesConf.performSomeTask();
-        System.out.println(log4J2PropertiesConf.getClass().getName());
-    }
+
     @Test
     public void dateTest() {
         String string = "1/11 /1981";

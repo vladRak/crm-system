@@ -1,7 +1,6 @@
 package jcrm.pp.ua.crmsystem.services;
 
-import jcrm.pp.ua.crmsystem.entities.EntityWithRevision;
-import jcrm.pp.ua.crmsystem.entities.Imp.*;
+import jcrm.pp.ua.crmsystem.entities.*;
 
 import java.util.List;
 

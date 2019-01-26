@@ -1,6 +1,6 @@
 package jcrm.pp.ua.crmsystem.customClasses.registration;
 
-import jcrm.pp.ua.crmsystem.entities.Imp.User;
+import jcrm.pp.ua.crmsystem.entities.User;
 import jcrm.pp.ua.crmsystem.entities.Privilege;
 import jcrm.pp.ua.crmsystem.entities.Role;
 import jcrm.pp.ua.crmsystem.repositories.PrivilegeRepo;
@@ -96,7 +96,7 @@ ApplicationListener<ContextRefreshedEvent> {
             listQueries.add("INSERT INTO contact (id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1));");
             listQueries.add("INSERT INTO base_client (id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1));");
 //            listQueries.add("INSERT INTO base_business_obj (id, b_o_type, isDeleted, physicalRemoval, optlock) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1),'user', FALSE, FALSE, 0);");
-            listQueries.add("INSERT INTO base_business_obj (id, isDeleted, physicalRemoval, optlock) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1), FALSE, FALSE, 0);");
+            listQueries.add("INSERT INTO base_business_obj (id, deleted, physicalRemoval, optlock) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1), FALSE, FALSE, 0);");
             listQueries.add("INSERT INTO users_roles (user_id, role_id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1),(SELECT role.id FROM role role WHERE role.name = 'ROLE_SYSTEM'));");
             listQueries.add("UPDATE hibernate_sequence SET next_val = next_val + 1;");
 
@@ -130,7 +130,7 @@ ApplicationListener<ContextRefreshedEvent> {
     }
 
     @Transactional
-    Role createRoleIfNotFound(String name, Collection<Privilege> privileges) {
+    Role createRoleIfNotFound(String name, List<Privilege> privileges) {
 
         Role role = roleRepository.findByName(name);
         if (role == null) {

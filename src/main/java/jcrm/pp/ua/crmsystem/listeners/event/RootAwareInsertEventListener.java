@@ -1,6 +1,6 @@
 package jcrm.pp.ua.crmsystem.listeners.event;
 
-import jcrm.pp.ua.crmsystem.entities.Imp.BaseBusinessObjImp;
+import jcrm.pp.ua.crmsystem.entities.BaseBusinessObj;
 import org.hibernate.HibernateException;
 import org.hibernate.LockMode;
 import org.hibernate.event.spi.PersistEvent;
@@ -22,7 +22,7 @@ public class RootAwareInsertEventListener implements PersistEventListener {
 
         if(entity instanceof RootAware) {
             RootAware rootAware = (RootAware) entity;
-            BaseBusinessObjImp root = (BaseBusinessObjImp) rootAware.root();
+            BaseBusinessObj root = (BaseBusinessObj) rootAware.root();
             if (root != null && root.getId() != null) {
                 event.getSession().lock(root, LockMode.OPTIMISTIC_FORCE_INCREMENT);
             }

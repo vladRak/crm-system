@@ -7,7 +7,7 @@ import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import jcrm.pp.ua.crmsystem.customClasses.PageImplBean;
 import jcrm.pp.ua.crmsystem.customClasses.registration.InitialDataLoader;
 import jcrm.pp.ua.crmsystem.customClasses.registration.VirusResolver;
-import jcrm.pp.ua.crmsystem.entities.Imp.User;
+import jcrm.pp.ua.crmsystem.entities.User;
 import jcrm.pp.ua.crmsystem.json.serializers.PageSerializer;
 import jcrm.pp.ua.crmsystem.listeners.event.RootAwareEventListenerIntegrator;
 import org.hibernate.jpa.boot.spi.IntegratorProvider;

@@ -5,9 +5,8 @@ import com.github.fge.jsonschema.core.exceptions.ProcessingException;
 import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
-import jcrm.pp.ua.crmsystem.customClasses.registration.Log4J2PropertiesConf;
 import jcrm.pp.ua.crmsystem.dto.UserDTO;
-import jcrm.pp.ua.crmsystem.entities.Imp.User;
+import jcrm.pp.ua.crmsystem.entities.User;
 import jcrm.pp.ua.crmsystem.services.AccountService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;

@@ -3,7 +3,7 @@ package jcrm.pp.ua.crmsystem.configs;
 import jcrm.pp.ua.crmsystem.customClasses.CorsFilter;
 import jcrm.pp.ua.crmsystem.customClasses.CustomBasicAuthenticationEntryPoint;
 import jcrm.pp.ua.crmsystem.customClasses.registration.MyUserDetailsService;
-import jcrm.pp.ua.crmsystem.entities.Imp.User;
+import jcrm.pp.ua.crmsystem.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
 package jcrm.pp.ua.crmsystem.services;
 
-import jcrm.pp.ua.crmsystem.entities.Imp.AccountImp;
-import jcrm.pp.ua.crmsystem.entities.Imp.User;
+import jcrm.pp.ua.crmsystem.entities.Account;
+import jcrm.pp.ua.crmsystem.entities.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,8 +10,8 @@ public interface AccountService {
     boolean removeAccount(User admin);
     boolean blockAccount(Long id);
     boolean accountStatus(Long id);
-    Page<AccountImp> getAllAccounts(Pageable pageable);
-    AccountImp getAccountById(Long id);
+    Page<Account> getAllAccounts(Pageable pageable);
+    Account getAccountById(Long id);
     boolean deleteAccount(Long id);
 
 }

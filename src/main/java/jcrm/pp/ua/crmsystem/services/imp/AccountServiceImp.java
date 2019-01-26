@@ -1,9 +1,9 @@
 package jcrm.pp.ua.crmsystem.services.imp;
 
-import jcrm.pp.ua.crmsystem.entities.Imp.AccountImp;
-import jcrm.pp.ua.crmsystem.entities.Imp.Company;
-import jcrm.pp.ua.crmsystem.entities.Imp.Email;
-import jcrm.pp.ua.crmsystem.entities.Imp.User;
+import jcrm.pp.ua.crmsystem.entities.User;
+import jcrm.pp.ua.crmsystem.entities.Account;
+import jcrm.pp.ua.crmsystem.entities.Company;
+import jcrm.pp.ua.crmsystem.entities.Email;
 import jcrm.pp.ua.crmsystem.repositories.AccountRepo;
 import jcrm.pp.ua.crmsystem.repositories.RoleRepo;
 import jcrm.pp.ua.crmsystem.services.AccountService;
@@ -13,7 +13,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Arrays;
 
 @Service
@@ -38,7 +37,7 @@ public class AccountServiceImp implements AccountService{
             user.setCompany(company);
             user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_ADMINISTRATOR")));
 
-            AccountImp account = new AccountImp();
+            Account account = new Account();
             account.addClients(Arrays.asList(user,company));
 
             if (demo) demoData(account);
@@ -71,7 +70,7 @@ public class AccountServiceImp implements AccountService{
     @PreAuthorize("hasAuthority('ROLE_SYS_ADMINISTRATOR')")
     public boolean blockAccount(Long id){
         try {
-            AccountImp account = accountRepo.findOne(id);
+            Account account = accountRepo.findOne(id);
             account.setEnable(false);
             return true;
         }catch (Exception ex){
@@ -101,7 +100,7 @@ public class AccountServiceImp implements AccountService{
     }
 
     @PreAuthorize("hasAuthority('ROLE_SYS_ADMINISTRATOR')")
-    public Page<AccountImp> getAllAccounts(Pageable pageable){
+    public Page<Account> getAllAccounts(Pageable pageable){
         try {
             return accountRepo.findAll(pageable);
         }catch (Exception ex){
@@ -111,7 +110,7 @@ public class AccountServiceImp implements AccountService{
     }
 
     @PreAuthorize("hasAuthority('ROLE_SYS_ADMINISTRATOR')")
-    public AccountImp getAccountById(Long id){
+    public Account getAccountById(Long id){
         try {
            return accountRepo.findOne(id);
         }catch (Exception ex){
@@ -120,7 +119,7 @@ public class AccountServiceImp implements AccountService{
         return null;
     }
 
-    protected void demoData(AccountImp account){
+    protected void demoData(Account account){
 
     }
 }

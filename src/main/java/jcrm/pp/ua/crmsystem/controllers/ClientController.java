@@ -13,13 +13,12 @@ import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.EmailService;
 import jcrm.pp.ua.crmsystem.customClasses.PageImplBean;
 import jcrm.pp.ua.crmsystem.customClasses.registration.CSVReader;
-import jcrm.pp.ua.crmsystem.customClasses.registration.Log4J2PropertiesConf;
 import jcrm.pp.ua.crmsystem.dto.BaseClientDTO;
 import jcrm.pp.ua.crmsystem.dto.CompanyDTO;
 import jcrm.pp.ua.crmsystem.dto.ContactDTO;
-import jcrm.pp.ua.crmsystem.entities.Imp.BaseClientImp;
-import jcrm.pp.ua.crmsystem.entities.Imp.Company;
-import jcrm.pp.ua.crmsystem.entities.Imp.Contact;
+import jcrm.pp.ua.crmsystem.entities.BaseClient;
+import jcrm.pp.ua.crmsystem.entities.Company;
+import jcrm.pp.ua.crmsystem.entities.Contact;
 import jcrm.pp.ua.crmsystem.json.serializers.Views;
 import jcrm.pp.ua.crmsystem.services.ClientService;
 import jcrm.pp.ua.crmsystem.services.HistoryService;
@@ -44,9 +43,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URI;
-import java.nio.file.Path;
-import java.security.Timestamp;
-import java.util.Date;
 import java.util.List;
 
 
@@ -78,15 +74,15 @@ public class ClientController {
                                       @PageableDefault(size = 20) Pageable pageable) throws MessagingException, InterruptedException {
 
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
-        Page<BaseClientImp> clientsPage;
+        Page<BaseClient> clientsPage;
 
         if (search != null) {
             clientsPage = clientService.searchClients(search,pageable);
         }else clientsPage = clientService.getAllClients(pageable);
 
-        Page<BaseClientDTO> resultPage = clientsPage.map(new Converter<BaseClientImp, BaseClientDTO>() {
+        Page<BaseClientDTO> resultPage = clientsPage.map(new Converter<BaseClient, BaseClientDTO>() {
             @Override
-            public BaseClientDTO convert(BaseClientImp client) {
+            public BaseClientDTO convert(BaseClient client) {
                 if (client instanceof Contact){
                     ContactDTO contactDTO = modelMapper.map(client,ContactDTO.class);
                     return contactDTO;

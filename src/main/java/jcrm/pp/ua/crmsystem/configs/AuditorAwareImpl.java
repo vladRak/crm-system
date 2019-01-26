@@ -1,6 +1,6 @@
 package jcrm.pp.ua.crmsystem.configs;
 
-import jcrm.pp.ua.crmsystem.entities.Imp.User;
+import jcrm.pp.ua.crmsystem.entities.User;
 import jcrm.pp.ua.crmsystem.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.AuditorAware;

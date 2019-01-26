@@ -1,7 +1,7 @@
 package jcrm.pp.ua.crmsystem.customClasses.registration;
 
 import jcrm.pp.ua.crmsystem.configs.UserAwareUserDetails;
-import jcrm.pp.ua.crmsystem.entities.Imp.User;
+import jcrm.pp.ua.crmsystem.entities.User;
 import jcrm.pp.ua.crmsystem.entities.Privilege;
 import jcrm.pp.ua.crmsystem.entities.Role;
 import jcrm.pp.ua.crmsystem.repositories.RoleRepo;

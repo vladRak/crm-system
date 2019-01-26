@@ -1,12 +1,12 @@
 package jcrm.pp.ua.crmsystem.entities;
 
-import jcrm.pp.ua.crmsystem.entities.Imp.User;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,7 +20,7 @@ public class Role implements GrantedAuthority{
 
     private String name;
     @ManyToMany(mappedBy = "roles")
-    private Collection<User> users;
+    private List<User> users = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -29,7 +29,7 @@ public class Role implements GrantedAuthority{
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "privilege_id", referencedColumnName = "id"))
-    private Collection<Privilege> privileges;
+    private List<Privilege> privileges = new ArrayList<>();
 
     @Override
     public String getAuthority() {
