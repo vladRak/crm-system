@@ -3,16 +3,15 @@ package jcrm.pp.ua.crmsystem.entities;
 import jcrm.pp.ua.crmsystem.listeners.event.RootAware;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "phone")
 @EqualsAndHashCode(callSuper = true)
-@Audited
+//@Audited
 @Data
-public class Phone extends AbstractEntity implements RootAware<BaseClient> {
+public class Phone extends AbstractAccountContent implements RootAware<BaseClient> {
 
     private static final long serialVersionUID = 1L;
 
@@ -32,19 +31,4 @@ public class Phone extends AbstractEntity implements RootAware<BaseClient> {
     public BaseClient root() {
         return client;
     }
-
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj)
-//            return true;
-//        if (id == null || obj == null || getClass() != obj.getClass())
-//            return false;
-//        Phone that = (Phone) obj;
-//        return id.equals(that.id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return id == null ? 0 : id.hashCode();
-//    }
 }

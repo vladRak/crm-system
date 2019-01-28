@@ -3,7 +3,6 @@ package jcrm.pp.ua.crmsystem.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.envers.Audited;
 import org.hibernate.envers.NotAudited;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,9 +15,9 @@ import java.util.List;
 @Table(name = "user")
 //@DiscriminatorValue("user")
 @EqualsAndHashCode(callSuper = true)
-@Audited
+//@Audited
 @Data
-public class User extends Contact {
+public class User extends BaseTaskTarget {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,10 +29,6 @@ public class User extends Contact {
 
     private boolean enabled = true;
 
-    public void setPassword(String password) {
-        this.password = PASSWORD_ENCODER.encode(password);
-    }
-
     @NotAudited
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -43,4 +38,27 @@ public class User extends Contact {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private List<Role> roles = new ArrayList<>();
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "contact_id")
+    private Contact contact;
+
+//    @Builder
+//    public User(
+//            List<Task> tasks, String username,
+//            String password, boolean enabled,
+//            List<Role> roles, Contact contact) {
+//        super(tasks);
+//        this.username = username;
+//        this.password = password;
+//        this.enabled = enabled;
+//        this.roles = roles;
+//        this.contact = contact;
+//    }
+
+    public void setPassword(String password) {
+        this.password = PASSWORD_ENCODER.encode(password);
+    }
+
+
 }

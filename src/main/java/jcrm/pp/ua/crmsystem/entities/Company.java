@@ -2,7 +2,6 @@ package jcrm.pp.ua.crmsystem.entities;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.List;
 @Table(name = "company")
 //@DiscriminatorValue("company")
 @Data
-@Audited
+//@Audited
 @EqualsAndHashCode(callSuper = true, exclude = "contacts")
 public class Company extends BaseClient {
 

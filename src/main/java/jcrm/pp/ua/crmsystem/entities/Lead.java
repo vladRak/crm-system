@@ -4,9 +4,10 @@ package jcrm.pp.ua.crmsystem.entities;
 import jcrm.pp.ua.crmsystem.listeners.event.RootAware;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
+
+import java.math.BigDecimal;
 
 import static javax.persistence.CascadeType.MERGE;
 
@@ -14,9 +15,9 @@ import static javax.persistence.CascadeType.MERGE;
 @Table(name = "lead")
 //@DiscriminatorValue("lead")
 @EqualsAndHashCode(callSuper = true)
-@Audited
+//@Audited
 @Data
-public class Lead extends BaseBusinessObj implements RootAware<BaseClient> {
+public class Lead extends BaseTaskTarget implements RootAware<BaseClient> {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,7 +25,7 @@ public class Lead extends BaseBusinessObj implements RootAware<BaseClient> {
 
     private String leadStatus;
 
-    private Long budget;
+    private BigDecimal budget;
 
     @ManyToOne(cascade = {CascadeType.PERSIST, MERGE})
     @JoinColumn(name = "client_id")

@@ -2,20 +2,20 @@ package jcrm.pp.ua.crmsystem.entities;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.envers.Audited;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
-//@DiscriminatorValue("baseClient")
 @Table(name = "base_client")
 @EqualsAndHashCode(callSuper = true, exclude = "leads")
-@Audited
+//@Audited
+//@AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class BaseClient extends BaseBusinessObj {
+public abstract class BaseClient extends BaseTaskTarget {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,90 +26,114 @@ public class BaseClient extends BaseBusinessObj {
             fetch = FetchType.LAZY,
             mappedBy = "client",
             orphanRemoval = true)
-    private List<Phone> phones = new ArrayList<>();
+    private List<Phone> phones;
 
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "client",
             orphanRemoval = true)
-    private List<Email> emails = new ArrayList<>();
+    private List<Email> emails;
 
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "client",
             orphanRemoval = true)
-    private List<Address> addresses = new ArrayList<>();
+    private List<Address> addresses;
 
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "client",
             orphanRemoval = true)
-    private List<Lead> leads = new ArrayList<>();
+    private List<Lead> leads;
 
-    public void setAddresses(List<Address> addresses){
-        if(addresses!=null) addAddresses(addresses);
+    public BaseClient(
+            Long id, Long versionNum,
+            boolean deleted, boolean physicalRemoval,
+            Account account, List<Task> tasks,
+            User responsible, List<Phone> phones,
+            List<Email> emails, List<Address> addresses,
+            List<Lead> leads) {
+        super(id, versionNum, deleted, physicalRemoval, account, tasks);
+        this.responsible = responsible;
+        this.phones = phones;
+        this.emails = emails;
+        this.addresses = addresses;
+        this.leads = leads;
     }
 
-    public void setEmails(List<Email> emails){
-        if(emails!=null) addEmails(emails);
+
+
+
+
+
+
+
+
+
+    public void setAddresses(List<Address> addresses) {
+        if (addresses != null) addAddresses(addresses);
     }
 
-    public void setLeads(List<Lead> leads){
-        if(leads !=null) addLeads(leads);
+    public void setEmails(List<Email> emails) {
+        if (emails != null) addEmails(emails);
     }
 
-    public void setPhones(List<Phone> phones){
-        if(phones!=null)   addPhones(phones);
+    public void setLeads(List<Lead> leads) {
+        if (leads != null) addLeads(leads);
     }
 
-    public void addAddresses(List<Address> addresses){
+    public void setPhones(List<Phone> phones) {
+        if (phones != null) addPhones(phones);
+    }
+
+    public void addAddresses(List<Address> addresses) {
         for (Address a : addresses) {
             a.setClient(this);
             this.addresses.add(a);
         }
     }
 
-    public void addEmails(List<Email> emails){
+    public void addEmails(List<Email> emails) {
         for (Email e : emails) {
             e.setClient(this);
             this.emails.add(e);
         }
     }
 
-    public void addLeads(List<Lead> leads){
+    public void addLeads(List<Lead> leads) {
         for (Lead l : leads) {
             addLead(l);
         }
     }
 
-    public void addPhones(List<Phone> phones){
+    public void addPhones(List<Phone> phones) {
         for (Phone p : phones) {
             p.setClient(this);
             this.phones.add(p);
         }
     }
 
-    public void addLead(Lead lead){
-        addLead(lead,true);
+    public void addLead(Lead lead) {
+        addLead(lead, true);
     }
 
-    public void addLead(Lead lead, boolean set){
-        if(lead !=null){
-            if (getLeads().contains(lead)){
-                getLeads().set(getLeads().indexOf(lead),lead);
-            }else {
+    public void addLead(Lead lead, boolean set) {
+        if (lead != null) {
+            if (getLeads().contains(lead)) {
+                getLeads().set(getLeads().indexOf(lead), lead);
+            } else {
                 getLeads().add(lead);
             }
-            if (set){
-                lead.setClient(this,false);
+            if (set) {
+                lead.setClient(this, false);
             }
         }
     }
 
-    public void removeLead(Lead lead){
+    public void removeLead(Lead lead) {
         getLeads().remove(lead);
         lead.setClient(null);
     }

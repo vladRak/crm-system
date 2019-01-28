@@ -1,52 +1,70 @@
 package jcrm.pp.ua.crmsystem.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.OptimisticLockType;
-import org.hibernate.annotations.OptimisticLocking;
-import org.hibernate.envers.Audited;
+import lombok.*;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.Arrays;
 import java.util.List;
 
-import static javax.persistence.CascadeType.*;
+import static javax.persistence.CascadeType.ALL;
+import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Table(name = "account")
-@OptimisticLocking(type = OptimisticLockType.VERSION)
+//@OptimisticLocking(type = VERSION)
 @EqualsAndHashCode(callSuper = false)
-@Audited
-@Data
+//@Audited
+@Setter
+@Getter
 public class Account extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
     private boolean enable = true;
 
-    @OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.LAZY,
+    @OneToMany(
+            cascade = ALL,
+            fetch = LAZY,
             mappedBy = "account")
-    private List<User> users = new ArrayList<>();
+    private List<User> users;
 
-    @OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.LAZY,
+    @OneToMany(
+            cascade = ALL,
+            fetch = LAZY,
             mappedBy = "account")
-    private List<BaseClient> clients = new ArrayList<>();
+    private List<BaseClient> clients;
 
-    @OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.LAZY,
+    @OneToMany(
+            cascade = ALL,
+            fetch = LAZY,
             mappedBy = "account")
-    private List<Lead> leads = new ArrayList<>();
+    private List<Lead> leads;
 
-    @OneToMany(cascade = {CascadeType.ALL},
-            fetch = FetchType.LAZY,
+    @OneToMany(
+            cascade = ALL,
+            fetch = LAZY,
             mappedBy = "account")
-    private List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks;
+
+    @Builder
+    public Account(
+            Long id, Long versionNum,
+            boolean deleted, boolean physicalRemoval,
+            boolean enable, List<User> users,
+            List<BaseClient> clients, List<Lead> leads,
+            List<Task> tasks) {
+        super(id, versionNum, deleted, physicalRemoval);
+        this.enable = enable;
+        this.users = users;
+        this.clients = clients;
+        this.leads = leads;
+        this.tasks = tasks;
+    }
 
 
-//    public void setUsers(List<User> users){
+    //    public void setUsers(List<User> users){
 //        if(users!=null) addUsers(users);
 //    }
 
@@ -132,7 +150,6 @@ public class Account extends AbstractEntity {
 
     }
 
-
     //    public void setTasks(List<Task> tasks){
 //        if(tasks!=null)   addTasks(tasks);
 //    }
@@ -164,6 +181,4 @@ public class Account extends AbstractEntity {
 //        getTasks().remove(task);
 //        task.setAccount(null);
 //    }
-
-
 }

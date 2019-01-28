@@ -1,11 +1,18 @@
 package jcrm.pp.ua.crmsystem.services.imp;
 
 import jcrm.pp.ua.crmsystem.entities.User;
+import jcrm.pp.ua.crmsystem.repositories.UserRepo;
 import jcrm.pp.ua.crmsystem.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImp implements UserService {
+
+    @Autowired
+    UserRepo userRepo;
 
     @Override
     public boolean createUser(User user) {
@@ -39,6 +46,8 @@ public class UserServiceImp implements UserService {
 
     @Override
     public boolean deleteUser(Long id) {
+        userRepo.delete(id);
+
         return false;
     }
 }

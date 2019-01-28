@@ -1,7 +1,6 @@
 package jcrm.pp.ua.crmsystem.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 import org.hibernate.envers.Audited;
@@ -18,11 +17,27 @@ import static javax.persistence.CascadeType.*;
 @EqualsAndHashCode(callSuper = true)
 @EntityListeners(AuditingEntityListener.class)
 @OptimisticLocking(type = OptimisticLockType.VERSION)
-@Audited
-@Data
-public abstract class AbstractBusinessObj extends AbstractEntity {
+//@NoArgsConstructor
+//@Audited
+@Getter
+@Setter
+public abstract class AbstractAccountContent extends AbstractEntity {
 
+    private static final long serialVersionUID = 1L;
+
+    @NonNull
     @ManyToOne(cascade = {PERSIST, MERGE})
     @JoinColumn(name = "account")
-    private Account account = new Account();
+    private Account account;
+
+    public AbstractAccountContent() {
+    }
+
+    public AbstractAccountContent(
+            Long versionNum,
+            boolean deleted, boolean physicalRemoval,
+            Account account) {
+        super(versionNum, deleted, physicalRemoval);
+        this.account = account;
+    }
 }

@@ -30,15 +30,15 @@ public class AccountServiceImp implements AccountService{
             Email email = new Email();
             email.setEmail(user.getUsername());
 
-            user.addEmails(Arrays.asList(email));
+//            user.addEmails(Arrays.asList(email));
 
             Company company = new Company();
             company.setResponsible(user);
-            user.setCompany(company);
+//            user.setCompany(company);
             user.setRoles(Arrays.asList(roleRepository.findByName("ROLE_ADMINISTRATOR")));
 
             Account account = new Account();
-            account.addClients(Arrays.asList(user,company));
+//            account.addClients(Arrays.asList(user,company));
 
             if (demo) demoData(account);
             accountRepo.save(account);

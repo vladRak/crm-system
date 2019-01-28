@@ -1,8 +1,7 @@
 package jcrm.pp.ua.crmsystem.customClasses.registration;
 
-import jcrm.pp.ua.crmsystem.entities.User;
-import jcrm.pp.ua.crmsystem.entities.Privilege;
-import jcrm.pp.ua.crmsystem.entities.Role;
+import jcrm.pp.ua.crmsystem.entities.*;
+import jcrm.pp.ua.crmsystem.repositories.ContactRepo;
 import jcrm.pp.ua.crmsystem.repositories.PrivilegeRepo;
 import jcrm.pp.ua.crmsystem.repositories.RoleRepo;
 import jcrm.pp.ua.crmsystem.repositories.UserRepo;
@@ -28,6 +27,9 @@ ApplicationListener<ContextRefreshedEvent> {
 
     @Autowired
     private UserRepo userRepository;
+
+    @Autowired
+    private ContactRepo contactRepo;
 
     @Autowired
     private RoleRepo roleRepository;
@@ -92,11 +94,11 @@ ApplicationListener<ContextRefreshedEvent> {
         User system = userRepository.findByUsername("system");
         if (system == null) {
             List<String> listQueries = new ArrayList<>();
-            listQueries.add("INSERT INTO user (id, username, enabled) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1) ,'system', TRUE);");
-            listQueries.add("INSERT INTO contact (id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1));");
-            listQueries.add("INSERT INTO base_client (id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1));");
+            listQueries.add("INSERT INTO user (id, username, enabled ) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1) ,'system', TRUE);");
+//            listQueries.add("INSERT INTO contact (id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1));");
+//            listQueries.add("INSERT INTO base_client (id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1));");
 //            listQueries.add("INSERT INTO base_business_obj (id, b_o_type, isDeleted, physicalRemoval, optlock) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1),'user', FALSE, FALSE, 0);");
-            listQueries.add("INSERT INTO base_business_obj (id, deleted, physicalRemoval, optlock) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1), FALSE, FALSE, 0);");
+//            listQueries.add("INSERT INTO base_business_obj (id, deleted, physicalRemoval, optlock) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1), FALSE, FALSE, 0);");
             listQueries.add("INSERT INTO users_roles (user_id, role_id) VALUES ((SELECT next_val FROM hibernate_sequence LIMIT 1),(SELECT role.id FROM role role WHERE role.name = 'ROLE_SYSTEM'));");
             listQueries.add("UPDATE hibernate_sequence SET next_val = next_val + 1;");
 
@@ -108,12 +110,37 @@ ApplicationListener<ContextRefreshedEvent> {
 
         User sysAdmin = userRepository.findByUsername("sysAdmin");
         if (sysAdmin == null) {
+            Contact contact = contactRepo.save(new Contact());
+            Name name = new Name();
+            name.setSurname("ADMIN");
+            name.setFirstName("ADMIN");
+            contact.setFullName(name);
+
+
             sysAdmin = new User();
             sysAdmin.setUsername("sysAdmin");
             sysAdmin.setPassword("173247");
+            sysAdmin.setContact(contact);
             Role role = roleRepository.findByName("ROLE_SYS_ADMINISTRATOR");
             sysAdmin.setRoles(Arrays.asList(role));
             userRepository.save(sysAdmin);
+
+
+            Contact contact2 = contactRepo.save(new Contact());
+            Name name2 = new Name();
+            name2.setSurname("ADMIN2");
+            name2.setFirstName("ADMIN2");
+            contact2.setFullName(name2);
+
+
+            User sysAdmin2 = new User();
+            sysAdmin2.setUsername("sysAdmin2");
+            sysAdmin2.setPassword("1732472");
+            sysAdmin2.setContact(contact2);
+            Role role2 = roleRepository.findByName("ROLE_SYS_ADMINISTRATOR");
+            sysAdmin2.setRoles(Arrays.asList(role2));
+            userRepository.save(sysAdmin2);
+
         }
     }
 

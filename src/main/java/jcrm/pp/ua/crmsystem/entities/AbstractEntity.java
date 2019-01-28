@@ -1,27 +1,35 @@
 package jcrm.pp.ua.crmsystem.entities;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 import org.hibernate.envers.Audited;
+import org.hibernate.id.IdentifierGenerator;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 @MappedSuperclass
-@EqualsAndHashCode(callSuper = true)
 @EntityListeners(AuditingEntityListener.class)
 @OptimisticLocking(type = OptimisticLockType.VERSION)
-@Audited
-@Data
+//@NoArgsConstructor
+@AllArgsConstructor
+//@Audited
+@Setter
+@Getter
+
 public abstract class AbstractEntity extends AbstractAuditable<User, Long> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Id @GeneratedValue(strategy = SEQUENCE)
     private Long id;
 
     @Version @Column(name="OPTLOCK")
@@ -31,18 +39,43 @@ public abstract class AbstractEntity extends AbstractAuditable<User, Long> imple
 
     private boolean physicalRemoval = false;
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj)
-//            return true;
-//        if (id == null || obj == null || getClass() != obj.getClass())
-//            return false;
-//        AbstractEntity that = (AbstractEntity) obj;
-//        return id.equals(that.id);
+//    public AbstractEntity() {
 //    }
 //
-//    @Override
-//    public int hashCode() {
-//        return id == null ? 0 : id.hashCode();
+//    public AbstractEntity(Long versionNum, boolean deleted, boolean physicalRemoval) {
+//        this.versionNum = versionNum;
+//        this.deleted = deleted;
+//        this.physicalRemoval = physicalRemoval;
 //    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (id == null || obj == null || getClass() != obj.getClass())
+            return false;
+        AbstractEntity that = (AbstractEntity) obj;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id == null ? 0 : id.hashCode();
+    }
 }

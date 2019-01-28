@@ -7,7 +7,11 @@ import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import jcrm.pp.ua.crmsystem.dto.UserDTO;
 import jcrm.pp.ua.crmsystem.entities.User;
+import jcrm.pp.ua.crmsystem.repositories.ContactRepo;
 import jcrm.pp.ua.crmsystem.services.AccountService;
+import jcrm.pp.ua.crmsystem.services.ClientService;
+import jcrm.pp.ua.crmsystem.services.UserService;
+import jcrm.pp.ua.crmsystem.services.imp.UserServiceImp;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -68,6 +72,21 @@ public class AccountController {
         System.out.println("spring.jpa.show-sql = " + environment.getProperty("spring.jpa.show-sql"));
         System.out.println("spring.main.banner-mode = " + environment.getProperty("spring.main.banner-mode"));
         System.out.println("spring.main.banner-mode = " + environment.toString());
+    }
+
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    ContactRepo contactRepo;
+
+    @GetMapping(value = "/delete")
+    @ResponseStatus(HttpStatus.OK)
+        //@ResponseBody
+    void checkDelete(){
+//        userService.deleteUser(32L);
+        contactRepo.delete(30L);
     }
 
 //    @PostMapping(value = "/import")

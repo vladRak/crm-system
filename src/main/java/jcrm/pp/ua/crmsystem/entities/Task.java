@@ -4,9 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jcrm.pp.ua.crmsystem.listeners.event.RootAware;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.annotations.OptimisticLockType;
-import org.hibernate.annotations.OptimisticLocking;
-import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,15 +14,12 @@ import static javax.persistence.CascadeType.MERGE;
 @Table(name = "task")
 @EqualsAndHashCode(callSuper = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@OptimisticLocking(type = OptimisticLockType.VERSION)
-@Audited
+//@OptimisticLocking(type = OptimisticLockType.VERSION)
+//@Audited
 @Data
-public class Task extends AbstractBusinessObj implements RootAware<BaseBusinessObj> {
+public class Task extends AbstractAccountContent implements RootAware<BaseTaskTarget> {
 
     private static final long serialVersionUID = 1L;
-
-//    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-//    private Long id;
 
     private String task;
 
@@ -34,25 +28,22 @@ public class Task extends AbstractBusinessObj implements RootAware<BaseBusinessO
 
     @ManyToOne(cascade = {CascadeType.PERSIST,MERGE})
     @JoinColumn(name = "created_for_id")
-    private BaseBusinessObj createdFor = new BaseBusinessObj();
+    private BaseTaskTarget createdFor;
 
     @ManyToOne(cascade = {CascadeType.PERSIST,MERGE})
     @JoinColumn(name = "account")
-    private Account account = new Account();
-
-//    public Task() {
-//    }
+    private Account account;
 
     @Override
-    public BaseBusinessObj root() {
+    public BaseTaskTarget root() {
         return createdFor;
     }
 
-    public void setCreatedFor(BaseBusinessObj baseBusinessObj){
+    public void setCreatedFor(BaseTaskTarget baseBusinessObj){
         setCreatedFor(baseBusinessObj,true);
     }
 
-    public void setCreatedFor(BaseBusinessObj baseBusinessObj, boolean add){
+    public void setCreatedFor(BaseTaskTarget baseBusinessObj, boolean add){
         this.createdFor = baseBusinessObj;
         if (baseBusinessObj != null && add){
             createdFor.addTask(this,false);
@@ -67,21 +58,4 @@ public class Task extends AbstractBusinessObj implements RootAware<BaseBusinessO
             return false;
         }
     }
-
-
-
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (this == obj)
-//            return true;
-//        if (id == null || obj == null || getClass() != obj.getClass())
-//            return false;
-//        Task that = (Task) obj;
-//        return id.equals(that.id);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return id == null ? 0 : id.hashCode();
-//    }
 }

@@ -3,7 +3,6 @@ package jcrm.pp.ua.crmsystem.entities;
 import jcrm.pp.ua.crmsystem.listeners.event.RootAware;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.hibernate.envers.Audited;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,7 +13,7 @@ import java.util.Set;
 @Table(name = "contact")
 //@DiscriminatorValue("contact")
 @Data
-@Audited
+//@Audited
 @EqualsAndHashCode(callSuper = true)
 public class Contact extends BaseClient implements RootAware<Company> {
 
@@ -22,7 +21,7 @@ public class Contact extends BaseClient implements RootAware<Company> {
 
     @Embedded private Name fullName;
 
-    @Embedded private Set<EmbededPhone> phonesSet = new HashSet<>();
+//    @Embedded private Set<EmbededPhone> phonesSet = new HashSet<>();
 
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date birthday;
@@ -32,6 +31,10 @@ public class Contact extends BaseClient implements RootAware<Company> {
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "company_id")
     private Company company;
+
+    @OneToOne(mappedBy = "contact", cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            fetch = FetchType.LAZY)
+    private User user;
 
     public Contact() {
     }
