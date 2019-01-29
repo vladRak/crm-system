@@ -14,7 +14,7 @@ import static javax.persistence.FetchType.LAZY;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "base_business_obj")
+@Table(name = "base_task_target")
 @EqualsAndHashCode(callSuper = true)
 //@OptimisticLocking(type = OptimisticLockType.VERSION)
 //@Audited
@@ -32,13 +32,13 @@ public abstract class BaseTaskTarget extends AbstractAccountContent {
             orphanRemoval = true)
     private List<Task> tasks;
 
-    public BaseTaskTarget(
-            Long id, Long versionNum,
-            boolean deleted, boolean physicalRemoval,
-            Account account, List<Task> tasks) {
-        super(id, versionNum, deleted, physicalRemoval, account);
-        this.tasks = tasks;
-    }
+//    public BaseTaskTarget(
+//            Long id, Long versionNum,
+//            boolean deleted, boolean physicalRemoval,
+//            Account account, List<Task> tasks) {
+//        super(id, versionNum, deleted, physicalRemoval, account);
+//        this.tasks = tasks;
+//    }
 
 
 

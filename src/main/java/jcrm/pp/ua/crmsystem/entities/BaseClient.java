@@ -49,20 +49,20 @@ public abstract class BaseClient extends BaseTaskTarget {
             orphanRemoval = true)
     private List<Lead> leads;
 
-    public BaseClient(
-            Long id, Long versionNum,
-            boolean deleted, boolean physicalRemoval,
-            Account account, List<Task> tasks,
-            User responsible, List<Phone> phones,
-            List<Email> emails, List<Address> addresses,
-            List<Lead> leads) {
-        super(id, versionNum, deleted, physicalRemoval, account, tasks);
-        this.responsible = responsible;
-        this.phones = phones;
-        this.emails = emails;
-        this.addresses = addresses;
-        this.leads = leads;
-    }
+//    public BaseClient(
+//            Long id, Long versionNum,
+//            boolean deleted, boolean physicalRemoval,
+//            Account account, List<Task> tasks,
+//            User responsible, List<Phone> phones,
+//            List<Email> emails, List<Address> addresses,
+//            List<Lead> leads) {
+//        super(id, versionNum, deleted, physicalRemoval, account, tasks);
+//        this.responsible = responsible;
+//        this.phones = phones;
+//        this.emails = emails;
+//        this.addresses = addresses;
+//        this.leads = leads;
+//    }
 
 
 

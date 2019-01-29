@@ -33,11 +33,11 @@ public abstract class AbstractAccountContent extends AbstractEntity {
     public AbstractAccountContent() {
     }
 
-    public AbstractAccountContent(
-            Long versionNum,
-            boolean deleted, boolean physicalRemoval,
-            Account account) {
-        super(versionNum, deleted, physicalRemoval);
-        this.account = account;
-    }
+//    public AbstractAccountContent(
+//            Long versionNum,
+//            boolean deleted, boolean physicalRemoval,
+//            Account account) {
+//        super(versionNum, deleted, physicalRemoval);
+//        this.account = account;
+//    }
 }

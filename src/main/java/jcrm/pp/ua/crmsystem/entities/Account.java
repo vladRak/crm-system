@@ -48,20 +48,20 @@ public class Account extends AbstractEntity {
             mappedBy = "account")
     private List<Task> tasks;
 
-    @Builder
-    public Account(
-            Long id, Long versionNum,
-            boolean deleted, boolean physicalRemoval,
-            boolean enable, List<User> users,
-            List<BaseClient> clients, List<Lead> leads,
-            List<Task> tasks) {
-        super(id, versionNum, deleted, physicalRemoval);
-        this.enable = enable;
-        this.users = users;
-        this.clients = clients;
-        this.leads = leads;
-        this.tasks = tasks;
-    }
+//    @Builder
+//    public Account(
+//            Long id, Long versionNum,
+//            boolean deleted, boolean physicalRemoval,
+//            boolean enable, List<User> users,
+//            List<BaseClient> clients, List<Lead> leads,
+//            List<Task> tasks) {
+//        super(id, versionNum, deleted, physicalRemoval);
+//        this.enable = enable;
+//        this.users = users;
+//        this.clients = clients;
+//        this.leads = leads;
+//        this.tasks = tasks;
+//    }
 
 
     //    public void setUsers(List<User> users){

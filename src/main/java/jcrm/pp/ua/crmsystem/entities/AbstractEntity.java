@@ -1,39 +1,33 @@
 package jcrm.pp.ua.crmsystem.entities;
 
-import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
-import org.hibernate.envers.Audited;
-import org.hibernate.id.IdentifierGenerator;
 import org.springframework.data.jpa.domain.AbstractAuditable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-import static javax.persistence.GenerationType.SEQUENCE;
-
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
 @OptimisticLocking(type = OptimisticLockType.VERSION)
-//@NoArgsConstructor
-@AllArgsConstructor
 //@Audited
-@Setter
-@Getter
-
-public abstract class AbstractEntity extends AbstractAuditable<User, Long> implements Serializable {
+@Data
+public abstract class AbstractEntity
+        extends AbstractAuditable<User, Long>
+        implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id @GeneratedValue(strategy = SEQUENCE)
+    @Id
     private Long id;
 
-    @Version @Column(name="OPTLOCK")
-    private Long versionNum = 0L;
+    @Version
+    @Column(name = "OPTLOCK")
+    private Long version;
 
     private boolean deleted = false;
 
@@ -49,26 +43,13 @@ public abstract class AbstractEntity extends AbstractAuditable<User, Long> imple
 //    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (id == null || obj == null || getClass() != obj.getClass())
+        if (id == null ||
+                obj == null ||
+                getClass() != obj.getClass())
             return false;
         AbstractEntity that = (AbstractEntity) obj;
         return id.equals(that.id);

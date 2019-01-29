@@ -45,8 +45,8 @@ import java.util.Properties;
 @Configuration
 @PropertySources({
         @PropertySource(value = {"classpath:config.properties"}),
-        @PropertySource(value = {"file:${user.home}/crm/conf/config.properties"}, ignoreResourceNotFound = true),
-        @PropertySource(value = {"file:${user.home}/crm/conf/application.properties"}, ignoreResourceNotFound=true)
+//        @PropertySource(value = {"file:${user.home}/crm/conf/config.properties"}, ignoreResourceNotFound = true),
+//        @PropertySource(value = {"file:${user.home}/crm/conf/application.properties"}, ignoreResourceNotFound=true)
 })
 @EnableTransactionManagement
 //@EnableJpaRepositories
@@ -151,14 +151,14 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return new AuditorAwareImpl();
     }
 
-    @Value("${virustotal.api.key}")
-    private String APIKEY;
+//    @Value("${virustotal.api.key}")
+//    private String APIKEY;
 
-    @Bean
-    VirusResolver virusResolver() {
-        VirusResolver.getInstance().setAPIKEY(APIKEY);
-        return VirusResolver.getInstance();
-    }
+//    @Bean
+//    VirusResolver virusResolver() {
+//        VirusResolver.getInstance().setAPIKEY(APIKEY);
+//        return VirusResolver.getInstance();
+//    }
 
     @Bean
     InitialDataLoader initialDataLoader() {

@@ -10,7 +10,7 @@ import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import jcrm.pp.ua.crmsystem.customClasses.CompanyPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
-import jcrm.pp.ua.crmsystem.customClasses.EmailService;
+//import jcrm.pp.ua.crmsystem.customClasses.EmailService;
 import jcrm.pp.ua.crmsystem.customClasses.PageImplBean;
 import jcrm.pp.ua.crmsystem.customClasses.registration.CSVReader;
 import jcrm.pp.ua.crmsystem.dto.BaseClientDTO;
@@ -63,8 +63,8 @@ public class ClientController {
     HistoryService historyService;
 
 
-    @Autowired
-    EmailService emailService;
+//    @Autowired
+//    EmailService emailService;
 
     //@JsonView(Views.OneLineName.class)
     @GetMapping(value = "/list")
