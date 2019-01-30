@@ -6,7 +6,7 @@
 //import com.fasterxml.jackson.databind.SerializerProvider;
 //import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
 //import jcrm.pp.ua.crmsystem.dto.CompanyDTO;
-//import jcrm.pp.ua.crmsystem.entities.Company;
+//import jcrm.pp.ua.crmsystem.entities.impl.Company;
 //
 //import java.io.IOException;
 //

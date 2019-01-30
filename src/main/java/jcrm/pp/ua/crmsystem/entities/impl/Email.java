@@ -1,31 +1,29 @@
-package jcrm.pp.ua.crmsystem.entities;
+package jcrm.pp.ua.crmsystem.entities.impl;
 
+import jcrm.pp.ua.crmsystem.entities.AbstractAccountContent;
+import jcrm.pp.ua.crmsystem.entities.BaseClient;
 import jcrm.pp.ua.crmsystem.listeners.event.RootAware;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 
+import static javax.persistence.CascadeType.MERGE;
+
 @Entity
-@Table(name = "phone")
+@Table(name = "email")
 @EqualsAndHashCode(callSuper = true)
 //@Audited
 @Data
-public class Phone extends AbstractAccountContent implements RootAware<BaseClient> {
+public class Email extends AbstractAccountContent implements RootAware<BaseClient> {
 
     private static final long serialVersionUID = 1L;
 
-//    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
-//    private Long id;
+    private String email;
 
-    private String phone;
-
-    @ManyToOne()//cascade = {CascadeType.PERSIST,MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST, MERGE})
     @JoinColumn(name = "client_id")
     private BaseClient client;
-
-    public Phone() {
-    }
 
     @Override
     public BaseClient root() {

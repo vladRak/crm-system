@@ -1,6 +1,7 @@
-package jcrm.pp.ua.crmsystem.entities;
+package jcrm.pp.ua.crmsystem.entities.impl;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jcrm.pp.ua.crmsystem.entities.BaseTaskTarget;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.envers.NotAudited;

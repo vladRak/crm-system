@@ -1,6 +1,6 @@
 package jcrm.pp.ua.crmsystem.services.imp;
 
-import jcrm.pp.ua.crmsystem.entities.Task;
+import jcrm.pp.ua.crmsystem.entities.impl.Task;
 import jcrm.pp.ua.crmsystem.repositories.TaskRepo;
 import jcrm.pp.ua.crmsystem.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;

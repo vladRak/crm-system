@@ -1,5 +1,7 @@
-package jcrm.pp.ua.crmsystem.entities;
+package jcrm.pp.ua.crmsystem.entities.impl;
 
+import jcrm.pp.ua.crmsystem.entities.AbstractEntity;
+import jcrm.pp.ua.crmsystem.entities.BaseClient;
 import lombok.*;
 
 import javax.persistence.Entity;

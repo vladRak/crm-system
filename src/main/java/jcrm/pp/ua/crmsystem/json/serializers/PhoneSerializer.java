@@ -3,7 +3,7 @@ package jcrm.pp.ua.crmsystem.json.serializers;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import jcrm.pp.ua.crmsystem.entities.Phone;
+import jcrm.pp.ua.crmsystem.entities.impl.Phone;
 
 import java.io.IOException;
 import java.util.ArrayList;

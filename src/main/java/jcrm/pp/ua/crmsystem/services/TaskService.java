@@ -1,6 +1,6 @@
 package jcrm.pp.ua.crmsystem.services;
 
-import jcrm.pp.ua.crmsystem.entities.Task;
+import jcrm.pp.ua.crmsystem.entities.impl.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

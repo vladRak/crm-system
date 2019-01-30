@@ -1,11 +1,11 @@
 package jcrm.pp.ua.crmsystem.entities;
 
+import jcrm.pp.ua.crmsystem.entities.impl.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity

@@ -1,13 +1,12 @@
-package jcrm.pp.ua.crmsystem.entities;
+package jcrm.pp.ua.crmsystem.entities.impl;
 
+import jcrm.pp.ua.crmsystem.entities.BaseClient;
 import jcrm.pp.ua.crmsystem.listeners.event.RootAware;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "contact")

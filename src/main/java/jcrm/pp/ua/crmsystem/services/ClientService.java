@@ -3,8 +3,8 @@ package jcrm.pp.ua.crmsystem.services;
 import jcrm.pp.ua.crmsystem.customClasses.CompanyPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
 import jcrm.pp.ua.crmsystem.entities.BaseClient;
-import jcrm.pp.ua.crmsystem.entities.Company;
-import jcrm.pp.ua.crmsystem.entities.Contact;
+import jcrm.pp.ua.crmsystem.entities.impl.Company;
+import jcrm.pp.ua.crmsystem.entities.impl.Contact;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

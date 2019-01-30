@@ -1,8 +1,7 @@
 package jcrm.pp.ua.crmsystem.entities;
 
+import jcrm.pp.ua.crmsystem.entities.impl.User;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 import org.springframework.data.jpa.domain.AbstractAuditable;

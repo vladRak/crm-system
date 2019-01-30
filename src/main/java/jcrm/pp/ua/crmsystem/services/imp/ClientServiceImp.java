@@ -4,6 +4,7 @@ import jcrm.pp.ua.crmsystem.customClasses.CompanyPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.registration.ClamAvClient;
 import jcrm.pp.ua.crmsystem.entities.*;
+import jcrm.pp.ua.crmsystem.entities.impl.*;
 import jcrm.pp.ua.crmsystem.repositories.BaseClientRepo;
 import jcrm.pp.ua.crmsystem.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;

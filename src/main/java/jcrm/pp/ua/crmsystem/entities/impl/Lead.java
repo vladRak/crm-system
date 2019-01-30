@@ -1,6 +1,8 @@
-package jcrm.pp.ua.crmsystem.entities;
+package jcrm.pp.ua.crmsystem.entities.impl;
 
 
+import jcrm.pp.ua.crmsystem.entities.BaseClient;
+import jcrm.pp.ua.crmsystem.entities.BaseTaskTarget;
 import jcrm.pp.ua.crmsystem.listeners.event.RootAware;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

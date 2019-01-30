@@ -6,7 +6,7 @@ import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import jcrm.pp.ua.crmsystem.dto.LeadDTO;
-import jcrm.pp.ua.crmsystem.entities.Lead;
+import jcrm.pp.ua.crmsystem.entities.impl.Lead;
 import jcrm.pp.ua.crmsystem.services.LeadService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

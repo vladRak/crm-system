@@ -1,6 +1,7 @@
 package jcrm.pp.ua.crmsystem.services;
 
 import jcrm.pp.ua.crmsystem.entities.*;
+import jcrm.pp.ua.crmsystem.entities.impl.*;
 
 import java.util.List;
 

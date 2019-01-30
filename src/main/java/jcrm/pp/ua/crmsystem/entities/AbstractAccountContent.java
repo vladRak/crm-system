@@ -1,9 +1,9 @@
 package jcrm.pp.ua.crmsystem.entities;
 
+import jcrm.pp.ua.crmsystem.entities.impl.Account;
 import lombok.*;
 import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
-import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.EntityListeners;

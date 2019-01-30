@@ -1,4 +1,4 @@
-package jcrm.pp.ua.crmsystem.entities;
+package jcrm.pp.ua.crmsystem.entities.impl;
 
 import lombok.Data;
 

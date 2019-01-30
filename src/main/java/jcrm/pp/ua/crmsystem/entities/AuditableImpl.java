@@ -7,14 +7,15 @@ import org.springframework.util.ClassUtils;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.UUID;
 
 @MappedSuperclass
 public abstract class AuditableImpl<U> implements Auditable<U, String> {
 
     @Transient
-    private String generatedId;
+    private UUID generatedId;
     @Id
-    private String id;
+    private UUID id;
     @ManyToOne
     private U createdBy;
     @Temporal(TemporalType.TIMESTAMP)
@@ -63,11 +64,11 @@ public abstract class AuditableImpl<U> implements Auditable<U, String> {
     }
 
     public String getId() {
-        return this.id;
+        return this.id.toString();
     }
 
     protected void setId(String id) {
-        this.id = id;
+        this.id = UUID.fromString(id);
     }
 
     @Transient

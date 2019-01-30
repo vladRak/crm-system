@@ -4,10 +4,9 @@ import java.util.UUID;
 
 public class IdGenerator {
 
-    public static String createId() {
+    public static UUID createId() {
         return UUID
-                .randomUUID().toString();
-
+                .randomUUID();
                 //.getMostSignificantBits() & Long.MAX_VALUE;
     }
 }

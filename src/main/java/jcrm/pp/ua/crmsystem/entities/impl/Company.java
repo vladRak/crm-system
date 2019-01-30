@@ -1,5 +1,6 @@
-package jcrm.pp.ua.crmsystem.entities;
+package jcrm.pp.ua.crmsystem.entities.impl;
 
+import jcrm.pp.ua.crmsystem.entities.BaseClient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
