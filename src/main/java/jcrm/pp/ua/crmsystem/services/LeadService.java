@@ -1,6 +1,6 @@
 package jcrm.pp.ua.crmsystem.services;
 
-import jcrm.pp.ua.crmsystem.entities.Lead;
+import jcrm.pp.ua.crmsystem.domain.entity.Lead;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

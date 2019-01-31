@@ -3,7 +3,8 @@ package jcrm.pp.ua.crmsystem.services.imp;
 import jcrm.pp.ua.crmsystem.customClasses.CompanyPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.registration.ClamAvClient;
-import jcrm.pp.ua.crmsystem.entities.*;
+import jcrm.pp.ua.crmsystem.domain.*;
+import jcrm.pp.ua.crmsystem.domain.entity.*;
 import jcrm.pp.ua.crmsystem.repositories.BaseClientRepo;
 import jcrm.pp.ua.crmsystem.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,21 +82,21 @@ public class ClientServiceImp implements ClientService{
 
     @Override
     public void updateContact(Contact contact, Long id) {
-        //BaseClient contactTemp = baseClientRepo.getOne(id);
+        //BaseClientImplImpl contactTemp = baseClientRepo.getOne(id);
         contact.setId(id);
         baseClientRepo.save(contact);
     }
 
     @Override
     public void updateCompany(Company company, Long id) {
-        //BaseClient contactTemp = baseClientRepo.getOne(id);
+        //BaseClientImplImpl contactTemp = baseClientRepo.getOne(id);
         company.setId(id);
         baseClientRepo.save(company);
     }
 
     @Override
-    public Page<BaseClient> getAllClients(Pageable pageable) {
-        Page<BaseClient> page = baseClientRepo.findAll(pageable);
+    public Page<BaseClientImplImpl> getAllClients(Pageable pageable) {
+        Page<BaseClientImplImpl> page = baseClientRepo.findAll(pageable);
         return page;
     }
 
@@ -161,8 +162,8 @@ public class ClientServiceImp implements ClientService{
     }
 
     @Override
-    public Page<BaseClient> searchClients(String search, Pageable pageable) {
-        Page<BaseClient> page =null; //baseClientRepo.searchByName(search,pageable);
+    public Page<BaseClientImplImpl> searchClients(String search, Pageable pageable) {
+        Page<BaseClientImplImpl> page =null; //baseClientRepo.searchByName(search,pageable);
         return page;
     }
 

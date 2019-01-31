@@ -1,9 +1,9 @@
 package jcrm.pp.ua.crmsystem.customClasses.registration;
 
 import jcrm.pp.ua.crmsystem.configs.UserAwareUserDetails;
-import jcrm.pp.ua.crmsystem.entities.User;
-import jcrm.pp.ua.crmsystem.entities.Privilege;
-import jcrm.pp.ua.crmsystem.entities.Role;
+import jcrm.pp.ua.crmsystem.domain.entity.User;
+import jcrm.pp.ua.crmsystem.domain.entity.Privilege;
+import jcrm.pp.ua.crmsystem.domain.entity.Role;
 import jcrm.pp.ua.crmsystem.repositories.RoleRepo;
 import jcrm.pp.ua.crmsystem.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;

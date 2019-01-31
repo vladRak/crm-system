@@ -4,7 +4,7 @@
 //import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
 //
 //
-//import jcrm.pp.ua.crmsystem.entities.*;
+//import jcrm.pp.ua.crmsystem.domain.*;
 //
 //import jcrm.pp.ua.crmsystem.repositories.*;
 //

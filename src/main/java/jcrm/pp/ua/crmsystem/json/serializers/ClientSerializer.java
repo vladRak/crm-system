@@ -4,9 +4,9 @@
 //import com.fasterxml.jackson.core.JsonProcessingException;
 //import com.fasterxml.jackson.databind.JsonSerializer;
 //import com.fasterxml.jackson.databind.SerializerProvider;
-//import jcrm.pp.ua.crmsystem.entities.Contact;
-//import jcrm.pp.ua.crmsystem.entities.Email;
-//import jcrm.pp.ua.crmsystem.entities.Phone;
+//import jcrm.pp.ua.crmsystem.domain.entity.Contact;
+//import jcrm.pp.ua.crmsystem.domain.entity.Email;
+//import jcrm.pp.ua.crmsystem.domain.entity.Phone;
 //
 //import java.io.IOException;
 //import java.util.ArrayList;

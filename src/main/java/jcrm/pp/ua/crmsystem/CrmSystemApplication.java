@@ -14,7 +14,7 @@ import java.util.TimeZone;
 
 @SpringBootApplication
 //@EnableAutoConfiguration
-@EntityScan("jcrm.pp.ua.crmsystem.entities")
+@EntityScan("jcrm.pp.ua.crmsystem.domain")
 public class CrmSystemApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {

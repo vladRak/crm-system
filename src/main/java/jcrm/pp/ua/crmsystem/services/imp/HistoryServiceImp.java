@@ -1,6 +1,7 @@
 package jcrm.pp.ua.crmsystem.services.imp;
 
-import jcrm.pp.ua.crmsystem.entities.*;
+import jcrm.pp.ua.crmsystem.domain.*;
+import jcrm.pp.ua.crmsystem.domain.entity.*;
 import jcrm.pp.ua.crmsystem.repositories.*;
 import jcrm.pp.ua.crmsystem.services.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;

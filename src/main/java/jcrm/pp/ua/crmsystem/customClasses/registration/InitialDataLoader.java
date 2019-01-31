@@ -1,8 +1,8 @@
 package jcrm.pp.ua.crmsystem.customClasses.registration;
 
-import jcrm.pp.ua.crmsystem.entities.*;
-import jcrm.pp.ua.crmsystem.entities.temp_test.Temp;
-import jcrm.pp.ua.crmsystem.entities.temp_test.TempRepo;
+import jcrm.pp.ua.crmsystem.domain.entity.*;
+import jcrm.pp.ua.crmsystem.domain.temp_test.Temp;
+import jcrm.pp.ua.crmsystem.domain.temp_test.TempRepo;
 import jcrm.pp.ua.crmsystem.repositories.ContactRepo;
 import jcrm.pp.ua.crmsystem.repositories.PrivilegeRepo;
 import jcrm.pp.ua.crmsystem.repositories.RoleRepo;
