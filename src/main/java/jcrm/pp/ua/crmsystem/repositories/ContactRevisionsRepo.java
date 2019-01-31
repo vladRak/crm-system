@@ -1,8 +1,8 @@
 package jcrm.pp.ua.crmsystem.repositories;
 
-import jcrm.pp.ua.crmsystem.entities.EntityWithRevision;
-import jcrm.pp.ua.crmsystem.entities.impl.Contact;
-import jcrm.pp.ua.crmsystem.entities.RevisionsEntity;
+import jcrm.pp.ua.crmsystem.domain.EntityWithRevision;
+import jcrm.pp.ua.crmsystem.domain.entity.Contact;
+import jcrm.pp.ua.crmsystem.domain.RevisionsEntity;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
 import org.springframework.beans.factory.annotation.Autowired;

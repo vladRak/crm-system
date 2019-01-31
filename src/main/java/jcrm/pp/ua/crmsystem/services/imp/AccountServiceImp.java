@@ -1,9 +1,9 @@
 package jcrm.pp.ua.crmsystem.services.imp;
 
-import jcrm.pp.ua.crmsystem.entities.impl.User;
-import jcrm.pp.ua.crmsystem.entities.impl.Account;
-import jcrm.pp.ua.crmsystem.entities.impl.Company;
-import jcrm.pp.ua.crmsystem.entities.impl.Email;
+import jcrm.pp.ua.crmsystem.domain.entity.User;
+import jcrm.pp.ua.crmsystem.domain.entity.Account;
+import jcrm.pp.ua.crmsystem.domain.entity.Company;
+import jcrm.pp.ua.crmsystem.domain.entity.Email;
 import jcrm.pp.ua.crmsystem.repositories.AccountRepo;
 import jcrm.pp.ua.crmsystem.repositories.RoleRepo;
 import jcrm.pp.ua.crmsystem.services.AccountService;

@@ -2,15 +2,15 @@ package jcrm.pp.ua.crmsystem.services;
 
 import jcrm.pp.ua.crmsystem.customClasses.CompanyPatchRequest;
 import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
-import jcrm.pp.ua.crmsystem.entities.BaseClient;
-import jcrm.pp.ua.crmsystem.entities.impl.Company;
-import jcrm.pp.ua.crmsystem.entities.impl.Contact;
+import jcrm.pp.ua.crmsystem.domain.BaseClientImplImpl;
+import jcrm.pp.ua.crmsystem.domain.entity.Company;
+import jcrm.pp.ua.crmsystem.domain.entity.Contact;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface ClientService {
     boolean importClients(byte[] file) throws Exception;
-    Page<BaseClient> getAllClients(Pageable pageable);
+    Page<BaseClientImplImpl> getAllClients(Pageable pageable);
     Page<Contact> getAllContacts(Pageable pageable);
     Page<Company> getAllCompanies(Pageable pageable);
     Contact getContactById(Long id);
@@ -23,7 +23,7 @@ public interface ClientService {
     void updateCompany(Company company, Long id);
     void patchContact(ContactPatchRequest patchRequest, Long id);
     void patchCompany(CompanyPatchRequest patchRequest, Long id);
-    Page<BaseClient> searchClients(String search, Pageable pageable);
+    Page<BaseClientImplImpl> searchClients(String search, Pageable pageable);
     Page<Contact> searchContacts(String search, Pageable pageable);
     Page<Company> searchCompanies(String search, Pageable pageable);
 

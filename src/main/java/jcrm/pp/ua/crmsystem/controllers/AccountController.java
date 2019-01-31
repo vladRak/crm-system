@@ -6,7 +6,7 @@ import com.github.fge.jsonschema.core.report.ProcessingReport;
 import com.github.fge.jsonschema.main.JsonSchema;
 import com.github.fge.jsonschema.main.JsonSchemaFactory;
 import jcrm.pp.ua.crmsystem.dto.UserDTO;
-import jcrm.pp.ua.crmsystem.entities.impl.User;
+import jcrm.pp.ua.crmsystem.domain.entity.User;
 import jcrm.pp.ua.crmsystem.repositories.ContactRepo;
 import jcrm.pp.ua.crmsystem.services.AccountService;
 import jcrm.pp.ua.crmsystem.services.UserService;

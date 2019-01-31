@@ -1,7 +1,7 @@
 package jcrm.pp.ua.crmsystem.configs;
 
 
-import jcrm.pp.ua.crmsystem.entities.impl.User;
+import jcrm.pp.ua.crmsystem.domain.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

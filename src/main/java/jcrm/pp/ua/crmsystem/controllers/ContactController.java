@@ -11,7 +11,7 @@
 //import jcrm.pp.ua.crmsystem.customClasses.EmailService;
 //import jcrm.pp.ua.crmsystem.customClasses.PageImplBean;
 //import jcrm.pp.ua.crmsystem.dto.*;
-//import jcrm.pp.ua.crmsystem.entities.*;
+//import jcrm.pp.ua.crmsystem.domain.*;
 //import jcrm.pp.ua.crmsystem.json.serializers.Views;
 //import jcrm.pp.ua.crmsystem.services.ContactService;
 //import org.modelmapper.*;

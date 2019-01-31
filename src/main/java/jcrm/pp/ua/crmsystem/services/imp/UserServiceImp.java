@@ -1,6 +1,6 @@
 package jcrm.pp.ua.crmsystem.services.imp;
 
-import jcrm.pp.ua.crmsystem.entities.impl.User;
+import jcrm.pp.ua.crmsystem.domain.entity.User;
 import jcrm.pp.ua.crmsystem.repositories.UserRepo;
 import jcrm.pp.ua.crmsystem.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

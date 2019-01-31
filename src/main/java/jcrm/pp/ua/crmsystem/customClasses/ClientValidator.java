@@ -9,8 +9,8 @@
 //import com.github.fge.jsonschema.main.JsonSchemaFactory;
 //import jcrm.pp.ua.crmsystem.dto.CompanyDTO;
 //import jcrm.pp.ua.crmsystem.dto.ContactDTO;
-//import jcrm.pp.ua.crmsystem.entities.impl.Company;
-//import jcrm.pp.ua.crmsystem.entities.impl.Contact;
+//import jcrm.pp.ua.crmsystem.domain.entity.Company;
+//import jcrm.pp.ua.crmsystem.domain.entity.Contact;
 //import org.modelmapper.ModelMapper;
 //import org.springframework.beans.factory.annotation.Autowired;
 //

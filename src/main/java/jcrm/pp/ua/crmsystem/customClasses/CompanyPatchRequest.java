@@ -1,7 +1,7 @@
 package jcrm.pp.ua.crmsystem.customClasses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jcrm.pp.ua.crmsystem.entities.impl.*;
+import jcrm.pp.ua.crmsystem.domain.entity.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;

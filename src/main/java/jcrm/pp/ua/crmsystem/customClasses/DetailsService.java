@@ -1,6 +1,6 @@
 //package jcrm.pp.ua.crmsystem.customClasses;
 //
-//import jcrm.pp.ua.crmsystem.entities.impl.User;
+//import jcrm.pp.ua.crmsystem.domain.entity.User;
 //import jcrm.pp.ua.crmsystem.repositories.UserRepo;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.core.authority.AuthorityUtils;

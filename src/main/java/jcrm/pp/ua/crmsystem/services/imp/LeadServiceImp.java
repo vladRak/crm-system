@@ -1,6 +1,6 @@
 package jcrm.pp.ua.crmsystem.services.imp;
 
-import jcrm.pp.ua.crmsystem.entities.impl.Lead;
+import jcrm.pp.ua.crmsystem.domain.entity.Lead;
 import jcrm.pp.ua.crmsystem.repositories.LeadRepo;
 import jcrm.pp.ua.crmsystem.services.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -13,12 +13,12 @@ import jcrm.pp.ua.crmsystem.customClasses.ContactPatchRequest;
 //import jcrm.pp.ua.crmsystem.customClasses.EmailService;
 import jcrm.pp.ua.crmsystem.customClasses.PageImplBean;
 import jcrm.pp.ua.crmsystem.customClasses.registration.CSVReader;
+import jcrm.pp.ua.crmsystem.domain.BaseClientImplImpl;
 import jcrm.pp.ua.crmsystem.dto.BaseClientDTO;
 import jcrm.pp.ua.crmsystem.dto.CompanyDTO;
 import jcrm.pp.ua.crmsystem.dto.ContactDTO;
-import jcrm.pp.ua.crmsystem.entities.BaseClient;
-import jcrm.pp.ua.crmsystem.entities.impl.Company;
-import jcrm.pp.ua.crmsystem.entities.impl.Contact;
+import jcrm.pp.ua.crmsystem.domain.entity.Company;
+import jcrm.pp.ua.crmsystem.domain.entity.Contact;
 import jcrm.pp.ua.crmsystem.json.serializers.Views;
 import jcrm.pp.ua.crmsystem.services.ClientService;
 import jcrm.pp.ua.crmsystem.services.HistoryService;
@@ -74,15 +74,15 @@ public class ClientController {
                                       @PageableDefault(size = 20) Pageable pageable) throws MessagingException, InterruptedException {
 
         modelMapper.getConfiguration().setAmbiguityIgnored(true);
-        Page<BaseClient> clientsPage;
+        Page<BaseClientImplImpl> clientsPage;
 
         if (search != null) {
             clientsPage = clientService.searchClients(search,pageable);
         }else clientsPage = clientService.getAllClients(pageable);
 
-        Page<BaseClientDTO> resultPage = clientsPage.map(new Converter<BaseClient, BaseClientDTO>() {
+        Page<BaseClientDTO> resultPage = clientsPage.map(new Converter<BaseClientImplImpl, BaseClientDTO>() {
             @Override
-            public BaseClientDTO convert(BaseClient client) {
+            public BaseClientDTO convert(BaseClientImplImpl client) {
                 if (client instanceof Contact){
                     ContactDTO contactDTO = modelMapper.map(client,ContactDTO.class);
                     return contactDTO;
